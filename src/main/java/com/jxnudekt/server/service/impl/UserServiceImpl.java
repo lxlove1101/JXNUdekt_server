@@ -1,14 +1,14 @@
 package com.jxnudekt.server.service.impl;
 
 import com.jxnudekt.server.dao.UserDao;
-import com.jxnudekt.server.domain.User;
+import com.jxnudekt.server.pojo.User;
 import com.jxnudekt.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service(value = "userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -19,10 +19,10 @@ public class UserServiceImpl implements UserService {
         return userDao.addUser(user);
     }
 
-    @Override
-    public Long deleteUserById(Long uid) {
-        return userDao.deleteUserById(uid);
-    }
+//    @Override
+//    public Long deleteUserById(Long uid) {
+//        return userDao.deleteUserById(uid);
+//    }
 
     @Override
     public Long updateUser(User user) {

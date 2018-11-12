@@ -1,11 +1,11 @@
-package com.jxnudekt.server.domain;
+package com.jxnudekt.server.pojo;
 
 public class User {
 
     private Long id;
     private Long uid;
     private String name;
-    private String description;
+    private String descrioition;
 
     public Long getId() {
         return id;
@@ -31,12 +31,12 @@ public class User {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescrioition() {
+        return descrioition;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescrioition(String descrioition) {
+        this.descrioition = descrioition;
     }
 
     @Override
