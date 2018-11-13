@@ -34,7 +34,6 @@ logs/
 .classpath
 .idea/
 .settings/
-log
 
 # svn
 .svn/
