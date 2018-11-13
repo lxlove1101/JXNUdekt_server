@@ -1,0 +1,23 @@
+2018-11-13 10:30:31,112  INFO [background-preinit] - HV000001: Hibernate Validator 6.0.13.Final
+2018-11-13 10:30:31,252  INFO [main] - Starting ServerApplication on DESKTOP-J0F4C6E with PID 9992 (A:\Mini_programs\server\target\classes started by Mlinglin in A:\Mini_programs\server)
+2018-11-13 10:30:31,252  INFO [main] - No active profile set, falling back to default profiles: default
+2018-11-13 10:30:31,968  INFO [main] - Tomcat initialized with port(s): 8080 (http)
+2018-11-13 10:30:32,049  INFO [main] - Root WebApplicationContext: initialization completed in 769 ms
+2018-11-13 10:30:32,066  INFO [main] - Servlet dispatcherServlet mapped to [/]
+2018-11-13 10:30:32,069  INFO [main] - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-11-13 10:30:32,069  INFO [main] - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-11-13 10:30:32,069  INFO [main] - Mapping filter: 'formContentFilter' to: [/*]
+2018-11-13 10:30:32,069  INFO [main] - Mapping filter: 'requestContextFilter' to: [/*]
+2018-11-13 10:30:32,323  INFO [main] - Initializing ExecutorService 'applicationTaskExecutor'
+2018-11-13 10:30:32,380  WARN [main] - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2018-11-13 10:30:32,513  INFO [main] - Tomcat started on port(s): 8080 (http) with context path ''
+2018-11-13 10:30:32,515  INFO [main] - Started ServerApplication in 1.489 seconds (JVM running for 1.893)
+2018-11-13 10:30:35,649  INFO [http-nio-8080-exec-2] - Initializing Servlet 'dispatcherServlet'
+2018-11-13 10:30:35,653  INFO [http-nio-8080-exec-2] - Completed initialization in 4 ms
+2018-11-13 10:30:35,674  INFO [http-nio-8080-exec-2] - HikariPool-1 - Starting...
+2018-11-13 10:30:35,743  INFO [http-nio-8080-exec-2] - HikariPool-1 - Start completed.
+2018-11-13 10:30:35,746 DEBUG [http-nio-8080-exec-2] - ==>  Preparing: SELECT id, uid, name, descrioition FROM user 
+2018-11-13 10:30:35,761 DEBUG [http-nio-8080-exec-2] - ==> Parameters: 
+2018-11-13 10:30:35,774 TRACE [http-nio-8080-exec-2] - <==    Columns: id, uid, name, descrioition
+2018-11-13 10:30:35,774 TRACE [http-nio-8080-exec-2] - <==        Row: 1, 1, ttt, testdescription
+2018-11-13 10:30:35,775 DEBUG [http-nio-8080-exec-2] - <==      Total: 1
