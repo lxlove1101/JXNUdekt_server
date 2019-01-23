@@ -1,7 +1,7 @@
 package com.jxnudekt.server.service.impl;
 
 import com.jxnudekt.server.dao.UserDao;
-import com.jxnudekt.server.pojo.User;
+import com.jxnudekt.server.entity.User;
 import com.jxnudekt.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

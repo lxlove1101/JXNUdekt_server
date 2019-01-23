@@ -1,4 +1,4 @@
-package com.jxnudekt.server.pojo;
+package com.jxnudekt.server.entity;
 
 public class User {
 

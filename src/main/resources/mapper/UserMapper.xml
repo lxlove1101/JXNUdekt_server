@@ -4,14 +4,14 @@
 <!-- USER -->
 <mapper namespace="com.jxnudekt.server.dao.UserDao">
     <!-- 结果映射 -->
-    <resultMap id="userMap" type="com.jxnudekt.server.pojo.User">
+    <resultMap id="userMap" type="com.jxnudekt.server.entity.User">
         <result column="id" property="id" jdbcType="INTEGER" />
         <result column="uid" property="uid" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="descrioition" property="descrioition" jdbcType="VARCHAR" />
     </resultMap>
 
-    <parameterMap id="User" type="com.jxnudekt.server.pojo.User"/>
+    <parameterMap id="User" type="com.jxnudekt.server.entity.User"/>
 
     <!-- 表所有字段 -->
     <sql id="allColumns">

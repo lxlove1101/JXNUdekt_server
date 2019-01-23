@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dim_activity_type1 -->
+<mapper namespace="com.jxnudekt.server.dao.DimActivityType1Dao">
+    <!-- 结果映射 -->
+    <resultMap id="dimActivityType1Map" type="com.jxnudekt.server.entity.DimActivityType1Entity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="tag" property="tag" jdbcType="VARCHAR" />
+        <result column="isValid" property="isValid" jdbcType="INTEGER" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <parameterMap id="DimActivityType1" type="com.jxnudekt.server.entity.DimActivityType1Entity"/>
+
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, name, tag, isValid, createTime, modifyTime
+    </sql>
+    
+    <!-- 查询所有数据 -->
+    <select id="findDimActivityType1All" resultMap="dimActivityType1Map">
+        SELECT
+        <include refid="allColumns" />
+        FROM dim_activity_type1
+    </select>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findDimActivityType1ByCondition" resultMap="dimActivityType1Map" parameterType="map">
+        SELECT
+        <include refid="allColumns" />
+        FROM dim_activity_type1 WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="tag != null and tag != ''">
+            AND tag LIKE CONCAT('%',#{tag},'%')
+        </if>
+        <if test="isValid != null">
+            AND isValid = #{isValid}
+        </if>
+        <if test="createTime != null">
+            AND createTime = #{createTime}
+        </if>
+        <if test="modifyTime != null">
+            AND modifyTime = #{modifyTime}
+        </if>
+    </select>
+    
+    <!-- 根据主键查询数据 -->
+    <select id="findDimActivityType1ByIds" resultMap="dimActivityType1Map" parameterType="list">
+        SELECT
+        <include refid="allColumns" />
+        FROM dim_activity_type1 WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertDimActivityType1" parameterType="map">
+        INSERT INTO dim_activity_type1 (<include refid="allColumns" />)
+        VALUES (
+            #{id},
+            #{name},
+            #{tag},
+            #{isValid},
+            #{createTime},
+            #{modifyTime}
+        )
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="insertDimActivityType1s" parameterType="list">
+        INSERT INTO dim_activity_type1 (<include refid="allColumns" />)
+        VALUES (
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.name},
+                #{item.tag},
+                #{item.isValid},
+                #{item.createTime},
+                #{item.modifyTime}
+            )
+        </foreach>
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateDimActivityType1" parameterType="map">
+        UPDATE dim_activity_type1 SET
+            name = #{name},
+            tag = #{tag},
+            isValid = #{isValid},
+            createTime = #{createTime},
+            modifyTime = #{modifyTime}
+        WHERE id = #{id}
+    </update>
+    
+    <!-- 批量修改数据 -->
+    <update id="updateDimActivityType1s" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE dim_activity_type1 SET
+                name = #{item.name},
+                tag = #{item.tag},
+                isValid = #{item.isValid},
+                createTime = #{item.createTime},
+                modifyTime = #{item.modifyTime}
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+    
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteDimActivityType1ById" parameterType="string">
+        DELETE FROM dim_activity_type1 WHERE id = #{id}
+    </delete>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteDimActivityType1ByIds" parameterType="list">
+        DELETE FROM dim_activity_type1 WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

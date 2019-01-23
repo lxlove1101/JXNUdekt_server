@@ -1,6 +1,6 @@
 package com.jxnudekt.server.service;
 
-import com.jxnudekt.server.pojo.User;
+import com.jxnudekt.server.entity.User;
 
 import java.util.List;
 
