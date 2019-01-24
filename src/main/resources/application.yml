@@ -13,7 +13,7 @@ server:
 
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3306/mini_programs_jxnudekt?useUnicode=true&characterEncoding=UTF8"
+    url: "jdbc:mysql://localhost:3306/mini_programs_jxnudekt?useUnicode=true&characterEncoding=UTF8&allowMultiQueries=true&useSSL=true"
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -12,11 +12,11 @@ import java.util.Map;
 public class ResultTool {
     /**
      * 错误码记录：
-     * SUCCESS--------成功
-     * PARAMETER_ERROR-----请求传参错误
-     * CONTENT_EMPTY-----没有对应内容
-     * USER_ALREADY_EXISTS-----此用户已存在
-     * UPLOAD_FILE_EMPTY-----上传文件为空
+     * SUCCESS--------成功0
+     * PARAMETER_ERROR-----请求传参错误1001
+     * CONTENT_EMPTY-----没有对应内容1002
+     * USER_ALREADY_EXISTS-----此用户已存在1003
+     * UPLOAD_FILE_EMPTY-----上传文件为空1004
      * NOT_FOUND------404异常抛出错误
      */
     /**

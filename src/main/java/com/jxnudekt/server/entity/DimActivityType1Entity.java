@@ -7,7 +7,7 @@ public class DimActivityType1Entity implements java.io.Serializable {
     private static final long serialVersionUID = 6611614818552658095L;
 
     /** id */
-    private Long id;
+    private Integer id;
 
     /** name */
     private String name;
@@ -29,7 +29,7 @@ public class DimActivityType1Entity implements java.io.Serializable {
      * 
      * @return id
      */
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -38,7 +38,7 @@ public class DimActivityType1Entity implements java.io.Serializable {
      * 
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -31,7 +31,7 @@ public class DimActivityType1Impl implements DimActivityType1Service {
     }
 
     @Override
-    public List<DimActivityType1Entity> findDimActivityType1ByIds(List<Long> ids) {
+    public List<DimActivityType1Entity> findDimActivityType1ByIds(List<Integer> ids) {
         return dimActivityType1Dao.findDimActivityType1ByIds(ids);
     }
 
@@ -56,12 +56,12 @@ public class DimActivityType1Impl implements DimActivityType1Service {
     }
 
     @Override
-    public int deleteDimActivityType1ById(Long id) {
+    public int deleteDimActivityType1ById(Integer id) {
         return dimActivityType1Dao.deleteDimActivityType1ById(id);
     }
 
     @Override
-    public int deleteDimActivityType1ByIds(List<Long> ids) {
+    public int deleteDimActivityType1ByIds(List<Integer> ids) {
         return dimActivityType1Dao.deleteDimActivityType1ByIds(ids);
     }
 }
