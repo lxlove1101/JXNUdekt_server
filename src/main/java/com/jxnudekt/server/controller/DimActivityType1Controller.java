@@ -1,11 +1,11 @@
 package com.jxnudekt.server.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jxnudekt.server.entity.DimActivityType1Entity;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.DimActivityType1Service;
 import com.jxnudekt.server.utils.ResultTool;
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,8 +47,9 @@ public class DimActivityType1Controller {
             }
             PageHelper.startPage(page, pageSize);
             List<DimActivityType1Entity> type1Entities = type1Service.findDimActivityType1All();
+            PageInfo<DimActivityType1Entity> pageInfo = new PageInfo<>(type1Entities);
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("content", type1Entities);
+            map.put("pageInfo", pageInfo);
             return ResultTool.result("SUCCESS", "", map);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
@@ -169,17 +170,5 @@ public class DimActivityType1Controller {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }
-
-
-//    public List<DimActivityType1Entity> findDimActivityType1All();
-//    public List<DimActivityType1Entity> findDimActivityType1ByCondition(Map type1);
-//    public List<DimActivityType1Entity> findDimActivityType1ByIds(List<Long> ids);
-//    public int insertDimActivityType1(DimActivityType1Entity type1Entity);
-//    public int insertDimActivityType1s(List<DimActivityType1Entity> list);
-//    public int updateDimActivityType1(DimActivityType1Entity type1Entity);
-//    public int updateDimActivityType1s(List<DimActivityType1Entity> list);
-//    public int deleteDimActivityType1ById(Long id);
-//    public int deleteDimActivityType1ByIds(List<Long> ids);
-
 
 }
