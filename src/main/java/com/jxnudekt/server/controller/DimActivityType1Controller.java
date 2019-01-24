@@ -36,7 +36,6 @@ public class DimActivityType1Controller {
         }
     }
 
-    //分页有问题暂时不用
     @RequestMapping(value = "/QUERY_ACTIVITY_TYPE1_BY_PAGE", method = RequestMethod.GET)
     public ResultModel findDimActivityType1ByPage(@RequestParam Integer page, @RequestParam Integer pageSize){
         try {
