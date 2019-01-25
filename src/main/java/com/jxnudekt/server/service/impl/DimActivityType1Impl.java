@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: LiaoXiang
- * @Description: ->
  * @CreateDate: 2019-01-23 16:56
  **/
 @Service(value = "DimActivityType1Service")

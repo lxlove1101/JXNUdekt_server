@@ -4,11 +4,9 @@ import com.jxnudekt.server.entity.DimActivityType1Entity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: LiaoXiang
- * @Description: ->
  * @CreateDate: 2019-01-23 16:39
  **/
 public interface DimActivityType1Dao {

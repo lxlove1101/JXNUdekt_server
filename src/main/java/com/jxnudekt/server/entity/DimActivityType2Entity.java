@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class DimActivityType2Entity implements java.io.Serializable {
     /** 版本号 */
-    private static final long serialVersionUID = -7075335592633485534L;
+    private static final long serialVersionUID = -2355410657145214257L;
 
     /** id */
-    private Long id;
+    private Integer id;
 
     /** name */
     private String name;
@@ -16,7 +16,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
     private String tag;
 
     /** type1id */
-    private Long type1id;
+    private Integer type1id;
 
     /** isValid */
     private Integer isValid;
@@ -32,7 +32,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
      * 
      * @return id
      */
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -41,7 +41,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
      * 
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -86,7 +86,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
      * 
      * @return type1id
      */
-    public Long getType1id() {
+    public Integer getType1id() {
         return this.type1id;
     }
 
@@ -95,7 +95,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
      * 
      * @param type1id
      */
-    public void setType1id(Long type1id) {
+    public void setType1id(Integer type1id) {
         this.type1id = type1id;
     }
 

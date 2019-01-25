@@ -19,7 +19,6 @@ import java.util.Map;
 
 /**
  * @Author: LiaoXiang
- * @Description: -> 活动一级类Controller
  * @CreateDate: 2019-01-23 17:00
  **/
 @Api(tags = "DimActivityType1Controller", description = "活动一级类")

@@ -3,19 +3,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- dim_activity_type2 -->
-<mapper namespace="mysql.dimActivityType2">
+<mapper namespace="com.jxnudekt.server.dao.DimActivityType2Dao">
     <!-- 结果映射 -->
     <resultMap id="dimActivityType2Map" type="DimActivityType2Entity">
-        <id column="id" property="id" jdbcType="BIGINT" />
+        <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="tag" property="tag" jdbcType="VARCHAR" />
-        <result column="type1Id" property="type1id" jdbcType="BIGINT" />
+        <result column="type1Id" property="type1id" jdbcType="INTEGER" />
         <result column="isValid" property="isValid" jdbcType="INTEGER" />
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
         <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
     </resultMap>
-
-    <parameterMap id="DimActivityType2" type="com.jxnudekt.server.entity.DimActivityType2Entity"/>
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -68,29 +66,29 @@
     <insert id="insertDimActivityType2" parameterType="map">
         INSERT INTO dim_activity_type2 (<include refid="allColumns" />)
         VALUES (
-            #{id},
+            null,
             #{name},
             #{tag},
             #{type1id},
             #{isValid},
-            #{createTime},
-            #{modifyTime}
+            NOW(),
+            NOW()
         )
     </insert>
     
     <!-- 批量插入数据 -->
     <insert id="insertDimActivityType2s" parameterType="list">
         INSERT INTO dim_activity_type2 (<include refid="allColumns" />)
-        VALUES (
+        VALUES
         <foreach collection="list" index="index" item="item" separator=",">
             (
-                #{item.id},
+                null,
                 #{item.name},
                 #{item.tag},
                 #{item.type1id},
                 #{item.isValid},
-                #{item.createTime},
-                #{item.modifyTime}
+                NOW(),
+                NOW()
             )
         </foreach>
     </insert>
@@ -102,8 +100,7 @@
             tag = #{tag},
             type1Id = #{type1id},
             isValid = #{isValid},
-            createTime = #{createTime},
-            modifyTime = #{modifyTime}
+            modifyTime = NOW()
         WHERE id = #{id}
     </update>
     
@@ -115,14 +112,13 @@
                 tag = #{item.tag},
                 type1Id = #{item.type1id},
                 isValid = #{item.isValid},
-                createTime = #{item.createTime},
-                modifyTime = #{item.modifyTime}
+                modifyTime = NOW()
             WHERE id = #{item.id}
         </foreach>
     </update>
     
     <!-- 根据主键删除数据 -->
-    <delete id="deleteDimActivityType2ById" parameterType="string">
+    <delete id="deleteDimActivityType2ById" parameterType="int">
         DELETE FROM dim_activity_type2 WHERE id = #{id}
     </delete>
     

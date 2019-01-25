@@ -7,7 +7,6 @@ import java.util.Map;
 
 /**
  * @Author: LiaoXiang
- * @Description: ->
  * @CreateDate: 2019-01-23 16:54
  **/
 public interface DimActivityType1Service {
