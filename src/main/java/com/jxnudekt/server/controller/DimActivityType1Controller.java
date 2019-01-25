@@ -6,6 +6,8 @@ import com.jxnudekt.server.entity.DimActivityType1Entity;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.DimActivityType1Service;
 import com.jxnudekt.server.utils.ResultTool;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +20,14 @@ import java.util.Map;
  * @Description: ->
  * @CreateDate: 2019-01-23 17:00
  **/
+@Api(tags = "DimActivityType1Controller", description = "活动一级类")
 @RestController
 @RequestMapping("/API")
 public class DimActivityType1Controller {
     @Autowired
     private DimActivityType1Service type1Service;
 
+    @ApiOperation(value = "", notes = "")
     @RequestMapping(value = "/QUERY_ACTIVITY_TYPE1_BY_ALL", method = RequestMethod.GET)
     public ResultModel findDimActivityType1All() {
         try {
