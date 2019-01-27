@@ -1,12 +1,12 @@
-DROP DATABASE IF EXISTS MINI_PROGRAMS_JXNUDEKT;
-CREATE DATABASE MINI_PROGRAMS_JXNUDEKT
+DROP DATABASE IF EXISTS mini_programs_jxnudekt;
+CREATE DATABASE mini_programs_jxnudekt
   DEFAULT CHARSET utf8mb4
   COLLATE utf8mb4_general_ci;
-USE MINI_PROGRAMS_JXNUDEKT;
+USE mini_programs_jxnudekt;
 
 -- 一级类表
-DROP TABLE IF EXISTS DIM_ACTIVITY_TYPE1;
-CREATE TABLE DIM_ACTIVITY_TYPE1 (
+DROP TABLE IF EXISTS dim_activity_type1;
+CREATE TABLE dim_activity_type1 (
   id         SMALLINT AUTO_INCREMENT, -- 主键id
   name       VARCHAR(20) NOT NULL, -- 一级类名称
   tag        VARCHAR(10) NOT NULL, -- 一级类标识
@@ -19,7 +19,7 @@ CREATE TABLE DIM_ACTIVITY_TYPE1 (
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
 
-INSERT INTO DIM_ACTIVITY_TYPE1
+INSERT INTO dim_activity_type1
 VALUES (1, '思想成长', 'A', 1, NOW(), NOW()),
        (2, '实践学习', 'B', 1, NOW(), NOW()),
        (3, '志愿公益', 'C', 1, NOW(), NOW()),
@@ -30,8 +30,8 @@ VALUES (1, '思想成长', 'A', 1, NOW(), NOW()),
        (8, '教师技能', 'H', 1, NOW(), NOW());
 
 -- 二级类表
-DROP TABLE IF EXISTS DIM_ACTIVITY_TYPE2;
-CREATE TABLE DIM_ACTIVITY_TYPE2 (
+DROP TABLE IF EXISTS dim_activity_type2;
+CREATE TABLE dim_activity_type2 (
   id         SMALLINT AUTO_INCREMENT, -- 主键id
   name       VARCHAR(20) NOT NULL, -- 二级类名称
   tag        VARCHAR(10) NOT NULL, -- 二级类标识
@@ -45,7 +45,7 @@ CREATE TABLE DIM_ACTIVITY_TYPE2 (
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
 
-INSERT INTO DIM_ACTIVITY_TYPE2
+INSERT INTO dim_activity_type2
 VALUES (1, '学术讲座', 'A01', 1, 1, NOW(), NOW()),
        (2, '新生导航课', 'A02', 1, 1, NOW(), NOW()),
        (3, '日常实践活动', 'B01', 2, 1, NOW(), NOW()),
@@ -67,8 +67,8 @@ VALUES (1, '学术讲座', 'A01', 1, 1, NOW(), NOW()),
        (19, '课堂教学技能', 'H03', 8, 1, NOW(), NOW());
 
 -- 三级类表
-DROP TABLE IF EXISTS DIM_ACTIVITY_TYPE3;
-CREATE TABLE DIM_ACTIVITY_TYPE3 (
+DROP TABLE IF EXISTS dim_activity_type3;
+CREATE TABLE dim_activity_type3 (
   id         SMALLINT AUTO_INCREMENT, -- 主键id
   name       VARCHAR(128) NOT NULL, -- 三级类名称
   tag        VARCHAR(10)  NOT NULL, -- 三级类标识
@@ -83,7 +83,7 @@ CREATE TABLE DIM_ACTIVITY_TYPE3 (
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
 
-INSERT INTO DIM_ACTIVITY_TYPE3
+INSERT INTO dim_activity_type3
 VALUES (1, '在校期间参加校、院举办的学术讲座', 'A0101', 1, 1, 1, NOW(), NOW()),
        (2, '应学院、学校要求面向校内外听众开设讲座', 'A0102', 1, 1, 1, NOW(), NOW()),
        (3, '学院开展的新生导航课程', 'A0201', 1, 2, 1, NOW(), NOW()),
@@ -142,8 +142,8 @@ VALUES (1, '在校期间参加校、院举办的学术讲座', 'A0101', 1, 1, 1,
        (56, '代表学校参与省级或省级以上课堂教学技能竞赛活动', 'H0303', 8, 19, 1, NOW(), NOW());
 
 -- 学生用户信息表
-DROP TABLE IF EXISTS USER_STU;
-CREATE TABLE USER_STU (
+DROP TABLE IF EXISTS user_stu;
+CREATE TABLE user_stu (
   id         BIGINT AUTO_INCREMENT, -- 主键id
   userId     VARCHAR(32) UNIQUE NOT NULL, -- 用户id(学号)
   password   VARCHAR(20)        NOT NULL, -- 密码
@@ -163,7 +163,7 @@ CREATE TABLE USER_STU (
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
 
-INSERT INTO USER_STU
+INSERT INTO user_stu
 VALUES (null, '201526702027', '123456', '廖翔', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
        (null, '201526702028', '123456', '廖翔1', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
        (null, '201526702029', '123456', '廖翔2', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
