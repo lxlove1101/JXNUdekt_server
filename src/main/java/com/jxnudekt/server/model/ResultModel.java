@@ -8,9 +8,12 @@ import java.util.Map;
  * @CreateDate: 2019-01-23 16:08
  **/
 public class ResultModel {
-    private String code;    // 返回码
-    private String message;  // 返回消息
-    private Map<String, Object> data;   // 数据源
+    // 返回码
+    private String code;
+    // 返回消息
+    private String message;
+    // 数据源
+    private Map<String, Object> data;
 
     public String getCode() {
         return code;

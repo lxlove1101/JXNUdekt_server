@@ -154,7 +154,7 @@ CREATE TABLE USER_STU (
   sex        TINYINT, -- 性别 0:女 1:男
   telephone  VARCHAR(20), -- 手机号码
   email      VARCHAR(35), -- 邮箱地址
-  status     TINYINT, -- 用户状态 1:正常 0:暂停登录
+  status     INT(2), -- 用户状态 1:正常 0:暂停登录
   createTime DATETIME           NOT NULL, -- 创建时间
   modifyTime DATETIME           NOT NULL, -- 修改时间
   PRIMARY KEY (id)

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_stu -->
+<mapper namespace="com.jxnudekt.server.dao.UserStuDao">
+    <!-- 结果映射 -->
+    <resultMap id="userStuMap" type="com.jxnudekt.server.entity.UserStuEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="userId" property="userId" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="classId" property="classId" jdbcType="INTEGER" />
+        <result column="collegeId" property="collegeId" jdbcType="INTEGER" />
+        <result column="headImg" property="headImg" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, userId, password, username, classId, collegeId, headImg, sex, telephone, email, status, createTime, modifyTime
+    </sql>
+    
+    <!-- 查询所有数据 -->
+    <select id="findUserStuAll" resultMap="userStuMap">
+        SELECT
+        <include refid="allColumns" />
+        FROM user_stu
+    </select>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findUserStuByCondition" resultMap="userStuMap" parameterType="map">
+        SELECT
+        <include refid="allColumns" />
+        FROM user_stu WHERE 1 = 1
+        <if test="userId != null and userId != ''">
+            AND userId LIKE CONCAT('%',#{userId},'%')
+        </if>
+        <if test="password != null and password != ''">
+            AND password LIKE CONCAT('%',#{password},'%')
+        </if>
+        <if test="username != null and username != ''">
+            AND username LIKE CONCAT('%',#{username},'%')
+        </if>
+        <if test="classId != null">
+            AND classId = #{classId}
+        </if>
+        <if test="collegeId != null">
+            AND collegeId = #{collegeId}
+        </if>
+        <if test="headImg != null and headImg != ''">
+            AND headImg LIKE CONCAT('%',#{headImg},'%')
+        </if>
+        <if test="sex != null">
+            AND sex = #{sex}
+        </if>
+        <if test="telephone != null and telephone != ''">
+            AND telephone LIKE CONCAT('%',#{telephone},'%')
+        </if>
+        <if test="email != null and email != ''">
+            AND email LIKE CONCAT('%',#{email},'%')
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="createTime != null">
+            AND createTime = #{createTime}
+        </if>
+        <if test="modifyTime != null">
+            AND modifyTime = #{modifyTime}
+        </if>
+    </select>
+    
+    <!-- 根据主键查询数据 -->
+    <select id="findUserStuByIds" resultMap="userStuMap" parameterType="list">
+        SELECT
+        <include refid="allColumns" />
+        FROM user_stu WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertUserStu" parameterType="map">
+        INSERT INTO user_stu (<include refid="allColumns" />)
+        VALUES (
+            null,
+            #{userId},
+            #{password},
+            #{username},
+            #{classId},
+            #{collegeId},
+            #{headImg},
+            #{sex},
+            #{telephone},
+            #{email},
+            #{status},
+            NOW(),
+            NOW()
+        )
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="insertUserStus" parameterType="list">
+        INSERT INTO user_stu (<include refid="allColumns" />)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                null,
+                #{item.userId},
+                #{item.password},
+                #{item.username},
+                #{item.classId},
+                #{item.collegeId},
+                #{item.headImg},
+                #{item.sex},
+                #{item.telephone},
+                #{item.email},
+                #{item.status},
+                NOW(),
+                NOW()
+            )
+        </foreach>
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateUserStu" parameterType="map">
+        UPDATE user_stu SET
+            userId = #{userId},
+            password = #{password},
+            username = #{username},
+            classId = #{classId},
+            collegeId = #{collegeId},
+            headImg = #{headImg},
+            sex = #{sex},
+            telephone = #{telephone},
+            email = #{email},
+            status = #{status},
+            modifyTime = NOW()
+        WHERE id = #{id}
+    </update>
+    
+    <!-- 批量修改数据 -->
+    <update id="updateUserStus" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE user_stu SET
+                userId = #{item.userId},
+                password = #{item.password},
+                username = #{item.username},
+                classId = #{item.classId},
+                collegeId = #{item.collegeId},
+                headImg = #{item.headImg},
+                sex = #{item.sex},
+                telephone = #{item.telephone},
+                email = #{item.email},
+                status = #{item.status},
+                modifyTime = NOW()
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+    
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteUserStuById" parameterType="long">
+        DELETE FROM user_stu WHERE id = #{id}
+    </delete>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteUserStuByIds" parameterType="list">
+        DELETE FROM user_stu WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
