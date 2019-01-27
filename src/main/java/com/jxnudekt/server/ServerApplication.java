@@ -16,8 +16,9 @@ public class ServerApplication {
         SpringApplication.run(ServerApplication.class, args);
     }
 
+    // 配置myBatis的分页插件pageHelper
     @Bean
-    public PageHelper pageHelper() {// 配置myBatis的分页插件pageHelper
+    public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
         Properties p = new Properties();
         p.setProperty("offsetAsPageNum", "true");
