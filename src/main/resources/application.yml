@@ -26,3 +26,7 @@ mybatis:
   type-aliases-package: com.jxnudekt.server.entity
   configuration:
     map-underscore-to-camel-case: true
+#打印SQL
+logging:
+  level:
+    com.jxnudekt.server.dao: debug
