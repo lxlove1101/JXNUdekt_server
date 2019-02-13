@@ -31,7 +31,20 @@
         <include refid="allColumns" />
         FROM user_stu
     </select>
-    
+
+    <!--登录查询数据-->
+    <select id="loginByQuery" resultMap="userStuMap" parameterType="map">
+        SELECT
+        <include refid="allColumns"/>
+        FROM user_stu WHERE 1 = 1
+        <if test="userId != null and userId != ''">
+            AND userId = #{userId}
+        </if>
+        <if test="password != null and password != ''">
+            AND password = #{password}
+        </if>
+    </select>
+
     <!-- 根据条件查询数据 -->
     <select id="findUserStuByCondition" resultMap="userStuMap" parameterType="map">
         SELECT

@@ -10,6 +10,7 @@ import java.util.List;
  **/
 public interface UserStuDao {
     List<UserStuEntity> findUserStuAll();
+    List<UserStuEntity> loginByQuery(UserStuEntity user);
     List<UserStuEntity> findUserStuByCondition(UserStuEntity user);
     List<UserStuEntity> findUserStuByIds(List<Long> ids);
     int insertUserStu(UserStuEntity user);

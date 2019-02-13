@@ -41,6 +41,20 @@ public class UserStuController {
         }
     }
 
+    @ApiOperation(value = "登录查询", notes = "根据帐号密码查询学生用户信息")
+    @ApiImplicitParam(name = "user", value = "学生用户信息对象Map", required = true, dataType = "UserStuEntity", paramType = "body")
+    @RequestMapping(value = "/LOGIN_QUERY", method = RequestMethod.POST)
+    public ResultModel loginByQuery(@RequestBody UserStuEntity user) {
+        try {
+            List<UserStuEntity> users = userStuService.loginByQuery(user);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", users);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
     @ApiOperation(value = "分页查询学生用户信息", notes = "分页查询学生用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "查询的页数", required = true, dataType = "Integer", paramType = "query"),

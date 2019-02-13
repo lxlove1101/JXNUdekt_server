@@ -23,6 +23,11 @@ public class UserStuServiceImpl implements UserStuService {
     }
 
     @Override
+    public List<UserStuEntity> loginByQuery(UserStuEntity user) {
+        return userStuDao.loginByQuery(user);
+    }
+
+    @Override
     public List<UserStuEntity> findUserStuByCondition(UserStuEntity user) {
         return userStuDao.findUserStuByCondition(user);
     }
