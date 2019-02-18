@@ -3,7 +3,7 @@
 
 <!-- user_stu -->
 <mapper namespace="com.jxnudekt.server.dao.UserStuDao">
-    <!-- 结果映射 -->
+    <!-- 结果映射1 -->
     <resultMap id="userStuMap" type="com.jxnudekt.server.entity.UserStuEntity">
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="userId" property="userId" jdbcType="VARCHAR" />
@@ -19,6 +19,19 @@
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
         <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
     </resultMap>
+    <!--结果映射2-->
+    <resultMap id="userStuDetail" type="com.jxnudekt.server.entity.UserStuDetailEntity">
+        <result column="userId" property="userId" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="className" property="className" jdbcType="VARCHAR" />
+        <result column="collegeName" property="collegeName" jdbcType="VARCHAR" />
+        <result column="headImg" property="headImg" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+    </resultMap>
+
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -45,13 +58,22 @@
         </if>
     </select>
 
+    <!--根据用户id查询用户详细信息-->
+    <select id="findUserDetailInfoById" resultMap="userStuDetail" parameterType="string">
+        SELECT a.userId, a.password, a.username, b.className, c.collegeName, a.headImg, a.sex, a.telephone, a.email
+        FROM user_stu AS a
+                 LEFT JOIN dim_class AS b ON a.classId = b.id
+                 LEFT JOIN dim_college AS c ON a.collegeId = c.id
+        WHERE a.userId = #{userId}
+    </select>
+
     <!-- 根据条件查询数据 -->
     <select id="findUserStuByCondition" resultMap="userStuMap" parameterType="map">
         SELECT
         <include refid="allColumns" />
         FROM user_stu WHERE 1 = 1
         <if test="userId != null and userId != ''">
-            AND userId LIKE CONCAT('%',#{userId},'%')
+            AND userId = #{userId}
         </if>
         <if test="password != null and password != ''">
             AND password LIKE CONCAT('%',#{password},'%')

@@ -1,8 +1,10 @@
 package com.jxnudekt.server.service;
 
+import com.jxnudekt.server.entity.UserStuDetailEntity;
 import com.jxnudekt.server.entity.UserStuEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: LiaoXiang
@@ -10,6 +12,7 @@ import java.util.List;
  **/
 public interface UserStuService {
     List<UserStuEntity> findUserStuAll();
+    List<UserStuDetailEntity> findUserDetailInfoById(String userId);
     List<UserStuEntity> loginByQuery(UserStuEntity user);
     List<UserStuEntity> findUserStuByCondition(UserStuEntity user);
     List<UserStuEntity> findUserStuByIds(List<Long> ids);

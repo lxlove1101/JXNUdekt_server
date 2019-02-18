@@ -1,12 +1,14 @@
 package com.jxnudekt.server.service.impl;
 
 import com.jxnudekt.server.dao.UserStuDao;
+import com.jxnudekt.server.entity.UserStuDetailEntity;
 import com.jxnudekt.server.entity.UserStuEntity;
 import com.jxnudekt.server.service.UserStuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: LiaoXiang
@@ -20,6 +22,11 @@ public class UserStuServiceImpl implements UserStuService {
     @Override
     public List<UserStuEntity> findUserStuAll() {
         return userStuDao.findUserStuAll();
+    }
+
+    @Override
+    public List<UserStuDetailEntity> findUserDetailInfoById(String userId) {
+        return userStuDao.findUserDetailInfoById(userId);
     }
 
     @Override

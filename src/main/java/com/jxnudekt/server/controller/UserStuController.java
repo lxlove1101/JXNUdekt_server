@@ -2,6 +2,7 @@ package com.jxnudekt.server.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jxnudekt.server.entity.UserStuDetailEntity;
 import com.jxnudekt.server.entity.UserStuEntity;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.UserStuService;
@@ -54,6 +55,21 @@ public class UserStuController {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }
+
+    @ApiOperation(value = "查询用户详细信息", notes = "根据用户id查询用户详细信息")
+    @ApiImplicitParam(name = "userId", value = "userId", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/FIND_USER_DETAIL_INFO_BY_ID/{userId}", method = RequestMethod.GET)
+    public ResultModel findUserDetailInfoById(@PathVariable String userId) {
+        try {
+            List<UserStuDetailEntity> result = userStuService.findUserDetailInfoById(userId);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", result);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
 
     @ApiOperation(value = "分页查询学生用户信息", notes = "分页查询学生用户信息")
     @ApiImplicitParams({
