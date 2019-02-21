@@ -5,6 +5,7 @@ package com.jxnudekt.server.entity;
  * @CreateDate: 2019-02-18 12:15
  **/
 public class UserStuDetailEntity {
+    private Long id;
     private String userId;
     private String password;
     private String username;
@@ -14,6 +15,14 @@ public class UserStuDetailEntity {
     private String sex;
     private String telephone;
     private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;

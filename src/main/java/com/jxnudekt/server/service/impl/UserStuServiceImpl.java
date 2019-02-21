@@ -25,8 +25,8 @@ public class UserStuServiceImpl implements UserStuService {
     }
 
     @Override
-    public List<UserStuDetailEntity> findUserDetailInfoById(String userId) {
-        return userStuDao.findUserDetailInfoById(userId);
+    public List<UserStuDetailEntity> findUserDetailInfoById(Long id) {
+        return userStuDao.findUserDetailInfoById(id);
     }
 
     @Override

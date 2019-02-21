@@ -57,11 +57,11 @@ public class UserStuController {
     }
 
     @ApiOperation(value = "查询用户详细信息", notes = "根据用户id查询用户详细信息")
-    @ApiImplicitParam(name = "userId", value = "userId", required = true, dataType = "String", paramType = "path")
-    @RequestMapping(value = "/FIND_USER_DETAIL_INFO_BY_ID/{userId}", method = RequestMethod.GET)
-    public ResultModel findUserDetailInfoById(@PathVariable String userId) {
+    @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/FIND_USER_DETAIL_INFO_BY_ID/{id}", method = RequestMethod.GET)
+    public ResultModel findUserDetailInfoById(@PathVariable String id) {
         try {
-            List<UserStuDetailEntity> result = userStuService.findUserDetailInfoById(userId);
+            List<UserStuDetailEntity> result = userStuService.findUserDetailInfoById(Long.parseLong(id));
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", result);
             return ResultTool.result("SUCCESS", "", map);
