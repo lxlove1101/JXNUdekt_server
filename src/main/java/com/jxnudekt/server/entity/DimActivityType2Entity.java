@@ -1,35 +1,55 @@
 package com.jxnudekt.server.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DimActivityType2Entity implements java.io.Serializable {
-    /** 版本号 */
+    /**
+     * 版本号
+     */
     private static final long serialVersionUID = -2355410657145214257L;
 
-    /** id */
+    /**
+     * id
+     */
     private Integer id;
 
-    /** name */
+    /**
+     * name
+     */
     private String name;
 
-    /** tag */
+    /**
+     * tag
+     */
     private String tag;
 
-    /** type1id */
+    /**
+     * type1id
+     */
     private Integer type1id;
 
-    /** isValid */
+    /**
+     * isValid
+     */
     private Integer isValid;
 
-    /** createTime */
+    /**
+     * createTime
+     */
     private Date createTime;
 
-    /** modifyTime */
+    /**
+     * modifyTime
+     */
     private Date modifyTime;
+
+    private List<DimActivityType3Entity> type3List;
 
     /**
      * 获取id
-     * 
+     *
      * @return id
      */
     public Integer getId() {
@@ -38,7 +58,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置id
-     * 
+     *
      * @param id
      */
     public void setId(Integer id) {
@@ -47,7 +67,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取name
-     * 
+     *
      * @return name
      */
     public String getName() {
@@ -56,7 +76,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置name
-     * 
+     *
      * @param name
      */
     public void setName(String name) {
@@ -65,7 +85,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取tag
-     * 
+     *
      * @return tag
      */
     public String getTag() {
@@ -74,7 +94,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置tag
-     * 
+     *
      * @param tag
      */
     public void setTag(String tag) {
@@ -83,7 +103,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取type1id
-     * 
+     *
      * @return type1id
      */
     public Integer getType1id() {
@@ -92,7 +112,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置type1id
-     * 
+     *
      * @param type1id
      */
     public void setType1id(Integer type1id) {
@@ -101,7 +121,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取isValid
-     * 
+     *
      * @return isValid
      */
     public Integer getIsValid() {
@@ -110,7 +130,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置isValid
-     * 
+     *
      * @param isValid
      */
     public void setIsValid(Integer isValid) {
@@ -119,7 +139,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取createTime
-     * 
+     *
      * @return createTime
      */
     public Date getCreateTime() {
@@ -128,7 +148,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置createTime
-     * 
+     *
      * @param createTime
      */
     public void setCreateTime(Date createTime) {
@@ -137,7 +157,7 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 获取modifyTime
-     * 
+     *
      * @return modifyTime
      */
     public Date getModifyTime() {
@@ -146,10 +166,25 @@ public class DimActivityType2Entity implements java.io.Serializable {
 
     /**
      * 设置modifyTime
-     * 
+     *
      * @param modifyTime
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<DimActivityType3Entity> getType3List() {
+        return type3List;
+    }
+
+    public void setType3List(List<DimActivityType3Entity> type3List) {
+        this.type3List = type3List;
+    }
+
+    public void addType3List(DimActivityType3Entity type3Entity) {
+        if(this.type3List == null){
+            this.type3List = new ArrayList<DimActivityType3Entity>();
+        }
+        this.type3List.add(type3Entity);
     }
 }

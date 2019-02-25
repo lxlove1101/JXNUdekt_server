@@ -173,16 +173,18 @@ VALUES (null, '201526702027', '123456', '廖翔', 1, 1, 'http://test', 0, '13257
 -- 活动实表
 DROP TABLE IF EXISTS FACT_ACTIVITY_INFO;
 CREATE TABLE FACT_ACTIVITY_INFO (
-  id           BIGINT AUTO_INCREMENT,
-  name         VARCHAR(64) NOT NULL,
-  type3Id      BIGINT      NOT NULL,
-  score        TINYINT     NOT NULL,
-  checkStatus  TINYINT     NOT NULL,
-  createUserId VARCHAR(32) NOT NULL,
-  modifyUserId VARCHAR(32) NOT NULL,
-  createTime   DATETIME    NOT NULL,
-  modifyTime   DATETIME    NOT NULL,
-  endTime      DATETIME    NOT NULL,
+  id           BIGINT AUTO_INCREMENT, -- 主键id
+  name         VARCHAR(64) NOT NULL,  -- 活动名字
+  type1Id      BIGINT      NOT NULL,  -- 活动对应的一级类id
+  type2Id      BIGINT      NOT NULL,  -- 活动对应的二级类id
+  type3Id      BIGINT      NOT NULL,  -- 活动对应的三级类id
+  score        TINYINT     NOT NULL,  -- 活动分数
+  status       TINYINT     NOT NULL,  -- 活动状态  0->不可用 1->审核通过 2->未审核
+  collegeId    BIGINT      NOT NULL,  -- 学院id
+  createUserId VARCHAR(32) NOT NULL,  -- 创建者用户id
+  modifyUserId VARCHAR(32) NOT NULL,  -- 修改者用户id
+  createTime   DATETIME    NOT NULL,  -- 创建时间
+  modifyTime   DATETIME    NOT NULL,  -- 修改时间
   PRIMARY KEY (id)
 )
   ENGINE = INNODB
