@@ -224,19 +224,28 @@ CREATE TABLE FACT_ACTIVITY_STU_INPUT (
   AUTO_INCREMENT = 1;
 
 -- 学院维表
-DROP TABLE IF EXISTS DIM_COLLEGE;
-CREATE TABLE DIM_COLLEGE (
-  id          BIGINT AUTO_INCREMENT,
+DROP TABLE IF EXISTS dim_college;
+CREATE TABLE dim_college (
+  id          SMALLINT AUTO_INCREMENT,
   collegeName VARCHAR(20) UNIQUE NOT NULL,
-  tag         VARCHAR(10)        NOT NULL,
+  tag         VARCHAR(20)        NOT NULL,
+  status      TINYINT            NOT NULL,
   createTime  DATETIME           NOT NULL,
   modifyTime  DATETIME           NOT NULL,
-  endTime     DATETIME           NOT NULL,
   PRIMARY KEY (id)
 )
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
+
+INSERT INTO dim_college
+VALUES (null, '软件学院', 'ruanjian', 1, NOW(), NOW()),
+       (null, '计算机学院', 'jisuanji', 1, NOW(), NOW()),
+       (null, '公费师范生学院', 'gongfei', 1, NOW(), NOW()),
+       (null, '音乐学院', 'yinyue', 1, NOW(), NOW()),
+       (null, '文旅学院', 'wenlv', 1, NOW(), NOW()),
+       (null, '文学院', 'wen', 1, NOW(), NOW()),
+       (null, '理电学院', 'lidian', 1, NOW(), NOW());
 
 -- 班级维表
 DROP TABLE IF EXISTS DIM_CLASS;

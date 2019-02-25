@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dim_college -->
+<mapper namespace="com.jxnudekt.server.dao.DimCollegeDao">
+    <!-- 结果映射 -->
+    <resultMap id="dimCollegeMap" type="com.jxnudekt.server.entity.DimCollegeEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="collegeName" property="collegeName" jdbcType="VARCHAR"/>
+        <result column="tag" property="tag" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, collegeName, tag, status, createTime, modifyTime
+    </sql>
+
+    <!-- 查询所有数据 -->
+    <select id="findDimCollegeAll" resultMap="dimCollegeMap">
+        SELECT
+        <include refid="allColumns"/>
+        FROM dim_college
+    </select>
+
+    <!-- 根据条件查询数据 -->
+    <select id="findDimCollegeByCondition" resultMap="dimCollegeMap" parameterType="map">
+        SELECT
+        <include refid="allColumns"/>
+        FROM dim_college WHERE 1 = 1
+        <if test="collegeName != null and collegeName != ''">
+            AND collegeName LIKE CONCAT('%',#{collegeName},'%')
+        </if>
+        <if test="tag != null and tag != ''">
+            AND tag LIKE CONCAT('%',#{tag},'%')
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="createTime != null">
+            AND createTime = #{createTime}
+        </if>
+        <if test="modifyTime != null">
+            AND modifyTime = #{modifyTime}
+        </if>
+    </select>
+
+    <!-- 根据主键查询数据 -->
+    <select id="findDimCollegeByIds" resultMap="dimCollegeMap" parameterType="list">
+        SELECT
+        <include refid="allColumns"/>
+        FROM dim_college WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!-- 插入数据 -->
+    <insert id="insertDimCollege" parameterType="map">
+        INSERT INTO dim_college (<include refid="allColumns"/>)
+        VALUES (
+        null,
+        #{collegeName},
+        #{tag},
+        #{status},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <!-- 批量插入数据 -->
+    <insert id="insertDimColleges" parameterType="list">
+        INSERT INTO dim_college (<include refid="allColumns"/>)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.collegeName},
+            #{item.tag},
+            #{item.status},
+            NOW(),
+            NOW()
+            )
+        </foreach>
+    </insert>
+
+    <!-- 修改数据 -->
+    <update id="updateDimCollege" parameterType="map">
+        UPDATE dim_college
+        SET collegeName = #{collegeName},
+            tag         = #{tag},
+            status      = #{status},
+            modifyTime  = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 批量修改数据 -->
+    <update id="updateDimColleges" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE dim_college
+            SET collegeName = #{item.collegeName},
+            tag = #{item.tag},
+            status = #{item.status},
+            modifyTime = NOW()
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteDimCollegeById" parameterType="int">
+        DELETE
+        FROM dim_college
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteDimCollegeByIds" parameterType="list">
+        DELETE FROM dim_college WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
