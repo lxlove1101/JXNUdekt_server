@@ -3,14 +3,18 @@ package com.jxnudekt.server.controller;
 import com.jxnudekt.server.entity.DimActivityType1Entity;
 import com.jxnudekt.server.entity.DimActivityType2Entity;
 import com.jxnudekt.server.entity.DimActivityType3Entity;
+import com.jxnudekt.server.entity.FactActivityInfoEntity;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.DimActivityType1Service;
 import com.jxnudekt.server.service.DimActivityType2Service;
 import com.jxnudekt.server.service.DimActivityType3Service;
+import com.jxnudekt.server.service.FactActivityInfoService;
 import com.jxnudekt.server.utils.ResultTool;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +38,10 @@ public class ActivityController {
     private DimActivityType2Service type2Service;
     @Autowired
     private DimActivityType3Service type3Service;
+    @Autowired
+    private FactActivityInfoService activityInfoService;
 
-    @ApiOperation(value = "查询所有活动类信息", notes = "查询所有活动类信息")
+    @ApiOperation(value = "查询所有活动分类信息", notes = "查询所有活动分类信息")
     @RequestMapping(value = "/QUERY_ACTIVITY_TYPE_INFO", method = RequestMethod.GET)
     public ResultModel queryActivityType() {
         try {
@@ -63,4 +69,22 @@ public class ActivityController {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }
+
+    @ApiOperation(value = "根据条件查询活动信息", notes = "根据条件查询活动信息")
+    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
+    @RequestMapping(value = "/QUERY_ACTIVITY_BY_CONDITION", method = RequestMethod.POST)
+    public ResultModel queryActivityInfoByCondition(@RequestBody FactActivityInfoEntity activityInfoEntity) {
+        try {
+            List<FactActivityInfoEntity> activityInfoEntities = activityInfoService.findFactActivityInfoByCondition(activityInfoEntity);
+            if (activityInfoEntities.size() == 0) {
+                return ResultTool.result("CONTENT_EMPTY", "", null);
+            }
+            Map<String, Object> resultMap = new HashMap<String, Object>();
+            resultMap.put("content", activityInfoEntities);
+            return ResultTool.result("SUCCESS", "", resultMap);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
 }

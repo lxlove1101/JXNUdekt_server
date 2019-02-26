@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- fact_activity_info -->
+<mapper namespace="com.jxnudekt.server.dao.FactActivityInfoDao">
+    <!-- 结果映射 -->
+    <resultMap id="factActivityInfoMap" type="com.jxnudekt.server.entity.FactActivityInfoEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type1Id" property="type1id" jdbcType="INTEGER" />
+        <result column="type2Id" property="type2id" jdbcType="INTEGER" />
+        <result column="type3Id" property="type3id" jdbcType="INTEGER" />
+        <result column="score" property="score" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="collegeId" property="collegeId" jdbcType="INTEGER" />
+        <result column="createUserId" property="createUserId" jdbcType="VARCHAR" />
+        <result column="modifyUserId" property="modifyUserId" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, name, type1Id, type2Id, type3Id, score, status, collegeId, createUserId, modifyUserId, createTime, modifyTime
+    </sql>
+    
+    <!-- 查询所有数据 -->
+    <select id="findFactActivityInfoAll" resultMap="factActivityInfoMap">
+        SELECT
+        <include refid="allColumns" />
+        FROM fact_activity_info
+    </select>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findFactActivityInfoByCondition" resultMap="factActivityInfoMap" parameterType="map">
+        SELECT
+        <include refid="allColumns" />
+        FROM fact_activity_info WHERE 1 = 1
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%',#{name},'%')
+        </if>
+        <if test="type1id != null and type1id != ''">
+            AND type1Id = #{type1id}
+        </if>
+        <if test="type2id != null and type2id != ''">
+            AND type2Id = #{type2id}
+        </if>
+        <if test="type3id != null and type3id != ''">
+            AND type3Id = #{type3id}
+        </if>
+        <if test="score != null">
+            AND score = #{score}
+        </if>
+            AND status = 1
+        <if test="collegeId != null and collegeId != ''">
+            AND collegeId = #{collegeId}
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+            AND createUserId = #{createUserId}
+        </if>
+        <if test="modifyUserId != null and modifyUserId != ''">
+            AND modifyUserId = #{modifyUserId}
+        </if>
+        <if test="createTime != null">
+            AND createTime = #{createTime}
+        </if>
+        <if test="modifyTime != null">
+            AND modifyTime = #{modifyTime}
+        </if>
+    </select>
+    
+    <!-- 根据主键查询数据 -->
+    <select id="findFactActivityInfoByIds" resultMap="factActivityInfoMap" parameterType="list">
+        SELECT
+        <include refid="allColumns" />
+        FROM fact_activity_info WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertFactActivityInfo" parameterType="map">
+        INSERT INTO fact_activity_info (<include refid="allColumns" />)
+        VALUES (
+            #{id},
+            #{name},
+            #{type1id},
+            #{type2id},
+            #{type3id},
+            #{score},
+            #{status},
+            #{collegeId},
+            #{createUserId},
+            #{modifyUserId},
+            NOW(),
+            NOW()
+        )
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="insertFactActivityInfos" parameterType="list">
+        INSERT INTO fact_activity_info (<include refid="allColumns" />)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.name},
+                #{item.type1id},
+                #{item.type2id},
+                #{item.type3id},
+                #{item.score},
+                #{item.status},
+                #{item.collegeId},
+                #{item.createUserId},
+                #{item.modifyUserId},
+                NOW(),
+                NOW()
+            )
+        </foreach>
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateFactActivityInfo" parameterType="map">
+        UPDATE fact_activity_info SET
+            name = #{name},
+            type1Id = #{type1id},
+            type2Id = #{type2id},
+            type3Id = #{type3id},
+            score = #{score},
+            status = #{status},
+            collegeId = #{collegeId},
+            createUserId = #{createUserId},
+            modifyUserId = #{modifyUserId},
+            modifyTime = NOW()
+        WHERE id = #{id}
+    </update>
+    
+    <!-- 批量修改数据 -->
+    <update id="updateFactActivityInfos" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE fact_activity_info SET
+                name = #{item.name},
+                type1Id = #{item.type1id},
+                type2Id = #{item.type2id},
+                type3Id = #{item.type3id},
+                score = #{item.score},
+                status = #{item.status},
+                collegeId = #{item.collegeId},
+                createUserId = #{item.createUserId},
+                modifyUserId = #{item.modifyUserId},
+                modifyTime = NOW()
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+    
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteFactActivityInfoById" parameterType="long">
+        DELETE FROM fact_activity_info WHERE id = #{id}
+    </delete>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteFactActivityInfoByIds" parameterType="list">
+        DELETE FROM fact_activity_info WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

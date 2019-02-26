@@ -171,16 +171,16 @@ VALUES (null, '201526702027', '123456', '廖翔', 1, 1, 'http://test', 0, '13257
        (null, '201526702031', '123456', '廖翔4', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW());
 
 -- 活动实表
-DROP TABLE IF EXISTS FACT_ACTIVITY_INFO;
-CREATE TABLE FACT_ACTIVITY_INFO (
+DROP TABLE IF EXISTS fact_activity_info;
+CREATE TABLE fact_activity_info (
   id           BIGINT AUTO_INCREMENT, -- 主键id
   name         VARCHAR(64) NOT NULL,  -- 活动名字
-  type1Id      BIGINT      NOT NULL,  -- 活动对应的一级类id
-  type2Id      BIGINT      NOT NULL,  -- 活动对应的二级类id
-  type3Id      BIGINT      NOT NULL,  -- 活动对应的三级类id
+  type1Id      SMALLINT      NOT NULL,  -- 活动对应的一级类id
+  type2Id      SMALLINT      NOT NULL,  -- 活动对应的二级类id
+  type3Id      SMALLINT      NOT NULL,  -- 活动对应的三级类id
   score        TINYINT     NOT NULL,  -- 活动分数
   status       TINYINT     NOT NULL,  -- 活动状态  0->不可用 1->审核通过 2->未审核
-  collegeId    BIGINT      NOT NULL,  -- 学院id
+  collegeId    SMALLINT      NOT NULL,  -- 学院id
   createUserId VARCHAR(32) NOT NULL,  -- 创建者用户id
   modifyUserId VARCHAR(32) NOT NULL,  -- 修改者用户id
   createTime   DATETIME    NOT NULL,  -- 创建时间
@@ -190,6 +190,18 @@ CREATE TABLE FACT_ACTIVITY_INFO (
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
+
+INSERT INTO fact_activity_info
+VALUES (null, '测试活动标题1', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题2', 2, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动3', 3, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题4', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题5', 2, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试标题6', 4, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题7', 3, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题8', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题9', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题10', 4, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW());
 
 -- 学生提交的活动
 DROP TABLE IF EXISTS FACT_ACTIVITY_STU_COMMIT;
