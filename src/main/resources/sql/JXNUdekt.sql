@@ -229,7 +229,8 @@ CREATE TABLE FACT_ACTIVITY_STU_INPUT (
   checkStatus  TINYINT      NOT NULL,
   checkUserId  VARCHAR(32),
   createTime   DATETIME     NOT NULL,
-  modifyTime   DATETIME     NOT NULL
+  modifyTime   DATETIME     NOT NULL,
+  PRIMARY KEY(id)
 )
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8
