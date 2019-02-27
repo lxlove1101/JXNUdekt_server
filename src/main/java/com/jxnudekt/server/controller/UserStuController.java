@@ -70,6 +70,19 @@ public class UserStuController {
         }
     }
 
+    @ApiOperation(value = "搜索用户", notes = "根据学号或姓名查询用户详细信息")
+    @ApiImplicitParam(name = "param", value = "param", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/QUERY_USER_DETAIL/{param}", method = RequestMethod.GET)
+    public ResultModel queryUserDetail(@PathVariable String param) {
+        try {
+            List<UserStuDetailEntity> result = userStuService.queryUserDetail(param);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", result);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
 
     @ApiOperation(value = "分页查询学生用户信息", notes = "分页查询学生用户信息")
     @ApiImplicitParams({

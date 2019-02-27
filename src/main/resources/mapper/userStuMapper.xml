@@ -68,6 +68,15 @@
         WHERE a.id = #{id}
     </select>
 
+    <!--条件搜索学生用户-->
+    <select id="queryUserDetail" resultMap="userStuDetail" parameterType="string">
+        SELECT a.id, a.userId, a.password, a.username, b.className, c.collegeName, a.headImg, a.sex, a.telephone, a.email
+        FROM user_stu AS a
+                 LEFT JOIN dim_class AS b ON a.classId = b.id
+                 LEFT JOIN dim_college AS c ON a.collegeId = c.id
+        WHERE a.userId = #{param} OR a.username = #{param}
+    </select>
+
     <!-- 根据条件查询数据 -->
     <select id="findUserStuByCondition" resultMap="userStuMap" parameterType="map">
         SELECT

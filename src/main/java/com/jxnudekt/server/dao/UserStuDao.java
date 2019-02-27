@@ -13,6 +13,7 @@ import java.util.Map;
 public interface UserStuDao {
     List<UserStuEntity> findUserStuAll();
     List<UserStuDetailEntity> findUserDetailInfoById(Long id);
+    List<UserStuDetailEntity> queryUserDetail(String param);
     List<UserStuEntity> loginByQuery(UserStuEntity user);
     List<UserStuEntity> findUserStuByCondition(UserStuEntity user);
     List<UserStuEntity> findUserStuByIds(List<Long> ids);
