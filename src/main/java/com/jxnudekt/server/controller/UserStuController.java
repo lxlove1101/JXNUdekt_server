@@ -76,6 +76,9 @@ public class UserStuController {
     public ResultModel queryUserDetail(@PathVariable String param) {
         try {
             List<UserStuDetailEntity> result = userStuService.queryUserDetail(param);
+            if (result.size() == 0) {
+                return ResultTool.result("CONTENT_EMPTY", "", null);
+            }
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", result);
             return ResultTool.result("SUCCESS", "", map);
