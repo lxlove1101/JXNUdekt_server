@@ -1,5 +1,7 @@
 package com.jxnudekt.server.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jxnudekt.server.entity.*;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.DimActivityType1Service;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,16 +86,23 @@ public class ActivityController {
     }
 
     @ApiOperation(value = "根据活动id或者名称查询活动信息", notes = "根据活动id或者名称查询活动信息")
-    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
+//    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
     @RequestMapping(value = "/QUERY_ACTIVITY_DETAIL_BY_TYPEID", method = RequestMethod.POST)
-    public ResultModel queryActivityDetailByTypeId(@RequestBody FactActivityInfoEntity activityInfoEntity) {
+    public ResultModel queryActivityDetailByTypeId(@RequestBody Map bodyMap) {
         try {
-            List<FactActivityDetailEntity> activityInfoEntities = activityInfoService.findFactActivityDetailByTypeId(activityInfoEntity);
-            if (activityInfoEntities.size() == 0) {
-                return ResultTool.result("CONTENT_EMPTY", "", null);
+            Integer page = (Integer) bodyMap.get("page");
+            Integer pageSize = (Integer) bodyMap.get("pageSize");
+            if (page == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
             }
+            if (pageSize == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
+            }
+            PageHelper.startPage(page, pageSize);
+            List<FactActivityDetailEntity> activityInfoEntities = activityInfoService.findFactActivityDetailByTypeId(bodyMap);
+            PageInfo<FactActivityDetailEntity> pageInfo = new PageInfo<>(activityInfoEntities);
             Map<String, Object> resultMap = new HashMap<String, Object>();
-            resultMap.put("content", activityInfoEntities);
+            resultMap.put("content", pageInfo);
             return ResultTool.result("SUCCESS", "", resultMap);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);

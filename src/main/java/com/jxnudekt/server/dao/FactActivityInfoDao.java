@@ -22,5 +22,5 @@ public interface FactActivityInfoDao {
     int deleteFactActivityInfoByIds(List<Long> ids);
 
 //    根据一级类id查询所有活动详细信息->关联具体类别名称
-    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(FactActivityInfoEntity activityInfoEntity);
+    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(Map activityInfoEntity);
 }

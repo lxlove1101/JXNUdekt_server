@@ -21,5 +21,5 @@ public interface FactActivityInfoService {
     int deleteFactActivityInfoById(Long id);
     int deleteFactActivityInfoByIds(List<Long> ids);
 
-    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(FactActivityInfoEntity activityInfoEntity);
+    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(Map activityInfoEntity);
 }
