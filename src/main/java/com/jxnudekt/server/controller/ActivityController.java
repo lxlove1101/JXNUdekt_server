@@ -1,9 +1,6 @@
 package com.jxnudekt.server.controller;
 
-import com.jxnudekt.server.entity.DimActivityType1Entity;
-import com.jxnudekt.server.entity.DimActivityType2Entity;
-import com.jxnudekt.server.entity.DimActivityType3Entity;
-import com.jxnudekt.server.entity.FactActivityInfoEntity;
+import com.jxnudekt.server.entity.*;
 import com.jxnudekt.server.model.ResultModel;
 import com.jxnudekt.server.service.DimActivityType1Service;
 import com.jxnudekt.server.service.DimActivityType2Service;
@@ -76,6 +73,23 @@ public class ActivityController {
     public ResultModel queryActivityInfoByCondition(@RequestBody FactActivityInfoEntity activityInfoEntity) {
         try {
             List<FactActivityInfoEntity> activityInfoEntities = activityInfoService.findFactActivityInfoByCondition(activityInfoEntity);
+            if (activityInfoEntities.size() == 0) {
+                return ResultTool.result("CONTENT_EMPTY", "", null);
+            }
+            Map<String, Object> resultMap = new HashMap<String, Object>();
+            resultMap.put("content", activityInfoEntities);
+            return ResultTool.result("SUCCESS", "", resultMap);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "根据活动id或者名称查询活动信息", notes = "根据活动id或者名称查询活动信息")
+    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
+    @RequestMapping(value = "/QUERY_ACTIVITY_DETAIL_BY_TYPEID", method = RequestMethod.POST)
+    public ResultModel queryActivityDetailByTypeId(@RequestBody FactActivityInfoEntity activityInfoEntity) {
+        try {
+            List<FactActivityDetailEntity> activityInfoEntities = activityInfoService.findFactActivityDetailByTypeId(activityInfoEntity);
             if (activityInfoEntities.size() == 0) {
                 return ResultTool.result("CONTENT_EMPTY", "", null);
             }

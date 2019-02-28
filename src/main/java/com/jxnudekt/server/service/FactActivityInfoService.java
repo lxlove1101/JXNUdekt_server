@@ -1,5 +1,6 @@
 package com.jxnudekt.server.service;
 
+import com.jxnudekt.server.entity.FactActivityDetailEntity;
 import com.jxnudekt.server.entity.FactActivityInfoEntity;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface FactActivityInfoService {
     int updateFactActivityInfos(List<FactActivityInfoEntity> list);
     int deleteFactActivityInfoById(Long id);
     int deleteFactActivityInfoByIds(List<Long> ids);
+
+    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(FactActivityInfoEntity activityInfoEntity);
 }

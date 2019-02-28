@@ -1,6 +1,7 @@
 package com.jxnudekt.server.service.impl;
 
 import com.jxnudekt.server.dao.FactActivityInfoDao;
+import com.jxnudekt.server.entity.FactActivityDetailEntity;
 import com.jxnudekt.server.entity.FactActivityInfoEntity;
 import com.jxnudekt.server.service.FactActivityInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,10 @@ public class FactActivityInfoServiceImpl implements FactActivityInfoService {
     @Override
     public int deleteFactActivityInfoByIds(List<Long> ids) {
         return factActivityInfoDao.deleteFactActivityInfoByIds(ids);
+    }
+
+    @Override
+    public List<FactActivityDetailEntity> findFactActivityDetailByTypeId(FactActivityInfoEntity activityInfoEntity) {
+        return factActivityInfoDao.findFactActivityDetailByTypeId(activityInfoEntity);
     }
 }

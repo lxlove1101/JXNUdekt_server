@@ -1,5 +1,6 @@
 package com.jxnudekt.server.dao;
 
+import com.jxnudekt.server.entity.FactActivityDetailEntity;
 import com.jxnudekt.server.entity.FactActivityInfoEntity;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface FactActivityInfoDao {
     int updateFactActivityInfos(List<FactActivityInfoEntity> list);
     int deleteFactActivityInfoById(Long id);
     int deleteFactActivityInfoByIds(List<Long> ids);
+
+//    根据一级类id查询所有活动详细信息->关联具体类别名称
+    List<FactActivityDetailEntity> findFactActivityDetailByTypeId(FactActivityInfoEntity activityInfoEntity);
 }

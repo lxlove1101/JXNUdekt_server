@@ -18,6 +18,26 @@
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
         <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
     </resultMap>
+
+    <!-- 结果映射2 -->
+    <resultMap id="factActivityDetailMap" type="com.jxnudekt.server.entity.FactActivityDetailEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type1Id" property="type1id" jdbcType="INTEGER" />
+        <result column="type1Name" property="type1name" jdbcType="VARCHAR"/>
+        <result column="type2Id" property="type2id" jdbcType="INTEGER" />
+        <result column="type2Name" property="type2name" jdbcType="VARCHAR"/>
+        <result column="type3Id" property="type3id" jdbcType="INTEGER" />
+        <result column="type3Name" property="type3name" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="collegeId" property="collegeId" jdbcType="INTEGER" />
+        <result column="collegeName" property="collegeName" jdbcType="VARCHAR"/>
+        <result column="createUserId" property="createUserId" jdbcType="VARCHAR" />
+        <result column="modifyUserId" property="modifyUserId" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
     
     <!-- 表所有字段 -->
     <sql id="allColumns">
@@ -30,7 +50,23 @@
         <include refid="allColumns" />
         FROM fact_activity_info
     </select>
-    
+
+    <!--根据一级类id查询所有活动详细信息->关联具体类别名称-->
+    <select id="findFactActivityDetailByTypeId" resultMap="factActivityDetailMap" parameterType="map">
+        SELECT a.*, b.name as type1Name, c.name as type2Name, d.name type3Name
+        FROM fact_activity_info AS a
+        LEFT JOIN dim_activity_type1 AS b ON a.type1Id = b.id
+        LEFT JOIN dim_activity_type2 AS c ON a.type2Id = c.id
+        LEFT JOIN dim_activity_type3 AS d ON a.type3Id = d.id
+        WHERE 1 = 1
+        <if test="type1id != null and type1id != ''">
+            AND a.type1Id = #{type1id}
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
     <!-- 根据条件查询数据 -->
     <select id="findFactActivityInfoByCondition" resultMap="factActivityInfoMap" parameterType="map">
         SELECT
