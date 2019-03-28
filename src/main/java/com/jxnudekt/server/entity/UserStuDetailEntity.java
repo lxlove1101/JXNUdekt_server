@@ -9,12 +9,17 @@ public class UserStuDetailEntity {
     private String userId;
     private String password;
     private String username;
+    private Integer classId;
     private String className;
+    private Integer collegeId;
     private String collegeName;
     private String headImg;
     private String sex;
     private String telephone;
     private String email;
+
+    public UserStuDetailEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -46,6 +51,22 @@ public class UserStuDetailEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    public Integer getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(Integer collegeId) {
+        this.collegeId = collegeId;
     }
 
     public String getClassName() {

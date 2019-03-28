@@ -25,7 +25,9 @@
         <result column="userId" property="userId" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="classId" property="classId" jdbcType="INTEGER"/>
         <result column="className" property="className" jdbcType="VARCHAR" />
+        <result column="collegeId" property="collegeId" jdbcType="INTEGER"/>
         <result column="collegeName" property="collegeName" jdbcType="VARCHAR" />
         <result column="headImg" property="headImg" jdbcType="VARCHAR" />
         <result column="sex" property="sex" jdbcType="VARCHAR" />
@@ -61,7 +63,7 @@
 
     <!--根据用户id查询用户详细信息-->
     <select id="findUserDetailInfoById" resultMap="userStuDetail" parameterType="long">
-        SELECT a.id, a.userId, a.password, a.username, b.className, c.collegeName, a.headImg, a.sex, a.telephone, a.email
+        SELECT a.id, a.userId, a.password, a.username, a.classId, b.className, a.collegeId, c.collegeName, a.headImg, a.sex, a.telephone, a.email
         FROM user_stu AS a
                  LEFT JOIN dim_class AS b ON a.classId = b.id
                  LEFT JOIN dim_college AS c ON a.collegeId = c.id

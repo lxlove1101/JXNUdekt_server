@@ -168,7 +168,8 @@ VALUES (null, '201526702027', '123456', '廖翔', 1, 1, 'http://test', 0, '13257
        (null, '201526702028', '123456', '廖翔1', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
        (null, '201526702029', '123456', '廖翔2', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
        (null, '201526702030', '123456', '廖翔3', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
-       (null, '201526702031', '123456', '廖翔4', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW());
+       (null, '201526702031', '123456', '廖翔4', 1, 1, 'http://test', 0, '13257097636', '534868492@qq.com', 1, NOW(), NOW()),
+       (null, '1', '1', '测试账号', 1, 1, 'http://test', 1, '13257097636', '534868492@qq.com', 1, NOW(), NOW());
 
 -- 活动实表
 DROP TABLE IF EXISTS fact_activity_info;
@@ -201,11 +202,21 @@ VALUES (null, '测试活动标题1', 1, 1, 1, 5, 1, 5, '201526702027', '20152670
        (null, '测试活动标题7', 3, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
        (null, '测试活动标题8', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
        (null, '测试活动标题9', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题10', 4, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题1', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题2', 2, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动3', 3, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题4', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题5', 2, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试标题6', 4, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题7', 3, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题8', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
+       (null, '测试活动标题9', 1, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW()),
        (null, '测试活动标题10', 4, 1, 1, 5, 1, 5, '201526702027', '201526702027', NOW(), NOW());
 
 -- 学生提交的活动
-DROP TABLE IF EXISTS FACT_ACTIVITY_STU_COMMIT;
-CREATE TABLE FACT_ACTIVITY_STU_COMMIT (
+DROP TABLE IF EXISTS activity_stu_commit;
+CREATE TABLE activity_stu_commit (
   id          BIGINT AUTO_INCREMENT,
   userId      VARCHAR(32) NOT NULL,
   activityId  BIGINT      NOT NULL,
@@ -219,22 +230,22 @@ CREATE TABLE FACT_ACTIVITY_STU_COMMIT (
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
 
-DROP TABLE IF EXISTS FACT_ACTIVITY_STU_INPUT;
-CREATE TABLE FACT_ACTIVITY_STU_INPUT (
-  id           BIGINT AUTO_INCREMENT,
-  userId       VARCHAR(32)  NOT NULL,
-  type3Id      VARCHAR(10)  NOT NULL,
-  activityName VARCHAR(128) NOT NULL,
-  score        TINYINT,
-  checkStatus  TINYINT      NOT NULL,
-  checkUserId  VARCHAR(32),
-  createTime   DATETIME     NOT NULL,
-  modifyTime   DATETIME     NOT NULL,
-  PRIMARY KEY(id)
-)
-  ENGINE = INNODB
-  DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 1;
+-- DROP TABLE IF EXISTS FACT_ACTIVITY_STU_INPUT;
+-- CREATE TABLE FACT_ACTIVITY_STU_INPUT (
+--   id           BIGINT AUTO_INCREMENT,
+--   userId       VARCHAR(32)  NOT NULL,
+--   type3Id      VARCHAR(10)  NOT NULL,
+--   activityName VARCHAR(128) NOT NULL,
+--   score        TINYINT,
+--   checkStatus  TINYINT      NOT NULL,
+--   checkUserId  VARCHAR(32),
+--   createTime   DATETIME     NOT NULL,
+--   modifyTime   DATETIME     NOT NULL,
+--   PRIMARY KEY(id)
+-- )
+--   ENGINE = INNODB
+--   DEFAULT CHARSET = UTF8
+--   AUTO_INCREMENT = 1;
 
 -- 学院维表
 DROP TABLE IF EXISTS dim_college;

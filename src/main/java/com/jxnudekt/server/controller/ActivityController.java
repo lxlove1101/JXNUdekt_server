@@ -4,19 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jxnudekt.server.entity.*;
 import com.jxnudekt.server.model.ResultModel;
-import com.jxnudekt.server.service.DimActivityType1Service;
-import com.jxnudekt.server.service.DimActivityType2Service;
-import com.jxnudekt.server.service.DimActivityType3Service;
-import com.jxnudekt.server.service.FactActivityInfoService;
+import com.jxnudekt.server.service.*;
 import com.jxnudekt.server.utils.ResultTool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +32,8 @@ public class ActivityController {
     private DimActivityType3Service type3Service;
     @Autowired
     private FactActivityInfoService activityInfoService;
+    @Autowired
+    private ActivityStuCommitService activityStuCommitService;
 
     @ApiOperation(value = "查询所有活动分类信息", notes = "查询所有活动分类信息")
     @RequestMapping(value = "/QUERY_ACTIVITY_TYPE_INFO", method = RequestMethod.GET)
@@ -105,6 +101,22 @@ public class ActivityController {
             resultMap.put("content", pageInfo);
             return ResultTool.result("SUCCESS", "", resultMap);
         } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "学生提交申报活动", notes = "学生提交申报活动")
+    @RequestMapping(value = "/COMMIT_ACTIVITY", method = RequestMethod.POST)
+    public ResultModel saveStuCommitActivities(@RequestBody Map bodyMap){
+        try {
+            String userId = bodyMap.get("userId").toString();
+            List<Long> ids = (List<Long>) bodyMap.get("activityIds");
+            int code = activityStuCommitService.insertActivityStuCommits(userId, ids);
+            if(ids.size() == code){
+                return ResultTool.result("SUCCESS", "", null);
+            }
+            return ResultTool.result("NOT_FOUND", "失败", null);
+        }catch(Exception e){
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }
