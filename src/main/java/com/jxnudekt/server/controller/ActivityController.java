@@ -82,7 +82,6 @@ public class ActivityController {
     }
 
     @ApiOperation(value = "根据活动id或者名称查询活动信息", notes = "根据活动id或者名称查询活动信息")
-//    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
     @RequestMapping(value = "/QUERY_ACTIVITY_DETAIL_BY_TYPEID", method = RequestMethod.POST)
     public ResultModel queryActivityDetailByTypeId(@RequestBody Map bodyMap) {
         try {
@@ -117,6 +116,20 @@ public class ActivityController {
             }
             return ResultTool.result("NOT_FOUND", "失败", null);
         }catch(Exception e){
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "查询活动具体信息", notes = "根据id查询活动具体信息")
+    @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/QUERY_ACTIVITY_DETAIL_BY_ID/{id}", method = RequestMethod.GET)
+    public ResultModel findActivityDetailById(@PathVariable String id) {
+        try {
+            FactActivityDetailEntity result = activityInfoService.findFactActivityDetailById(Long.parseLong(id));
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", result);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }

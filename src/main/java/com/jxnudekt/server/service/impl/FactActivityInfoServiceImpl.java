@@ -68,4 +68,9 @@ public class FactActivityInfoServiceImpl implements FactActivityInfoService {
     public List<FactActivityDetailEntity> findFactActivityDetailByTypeId(Map activityInfoEntity) {
         return factActivityInfoDao.findFactActivityDetailByTypeId(activityInfoEntity);
     }
+
+    @Override
+    public FactActivityDetailEntity findFactActivityDetailById(Long id) {
+        return factActivityInfoDao.findFactActivityDetailById(id);
+    }
 }

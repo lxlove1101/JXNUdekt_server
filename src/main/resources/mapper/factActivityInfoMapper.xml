@@ -51,7 +51,7 @@
         FROM fact_activity_info
     </select>
 
-    <!--根据一级类id查询所有活动详细信息->关联具体类别名称-->
+    <!--根据一级类id或者名称关键字查询所有活动详细信息->关联具体类别名称-->
     <select id="findFactActivityDetailByTypeId" resultMap="factActivityDetailMap" parameterType="map">
         SELECT a.*, b.name as type1Name, c.name as type2Name, d.name type3Name
         FROM fact_activity_info AS a
@@ -65,6 +65,17 @@
         <if test="name != null and name != ''">
             AND a.name LIKE CONCAT('%',#{name},'%')
         </if>
+    </select>
+
+    <!--根据活动id查询活动的详细信息-->
+    <select id="findFactActivityDetailById" resultMap="factActivityDetailMap" parameterType="long">
+        SELECT a.*, b.name as type1Name, c.name as type2Name, d.name as type3Name, e.collegeName as collegeName
+        FROM fact_activity_info AS a
+        LEFT JOIN dim_activity_type1 AS b ON a.type1Id = b.id
+        LEFT JOIN dim_activity_type2 AS c ON a.type2Id = c.id
+        LEFT JOIN dim_activity_type3 AS d ON a.type3Id = d.id
+        LEFT JOIN dim_college AS e ON a.collegeId = e.id
+        WHERE a.id = #{id}
     </select>
 
     <!-- 根据条件查询数据 -->
