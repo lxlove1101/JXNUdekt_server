@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- FEEDBACK_USER_COMMIT -->
+<mapper namespace="com.jxnudekt.server.dao.FeedbackUserCommitDao">
+    <!-- 结果映射 -->
+    <resultMap id="feedbackUserCommitMap" type="FeedbackUserCommitEntity">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="userId" property="userId" jdbcType="BIGINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="information" property="information" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, userId, title, information, status, createTime, modifyTime
+    </sql>
+
+    <!-- 添加反馈意见数据 -->
+    <insert id="insertFeedbackUserCommit" parameterType="map">
+        INSERT INTO feedback_user_commit (<include refid="allColumns" />)
+        VALUES (
+        null,
+        #{userId},
+        #{title},
+        #{information},
+        0,
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <!--根据用户id查询所反馈的意见信息-->
+    <select id="findFeedbackUserCommitByUserId" resultMap="feedbackUserCommitMap">
+        SELECT <include refid="allColumns"/>
+        FROM feedback_user_commit
+        WHERE userId = #{userId}
+    </select>
+
+    <!-- 查询所有数据 -->
+    <select id="findFeedbackUserCommitAll" resultMap="feedbackUserCommitMap">
+        SELECT
+        <include refid="allColumns" />
+        FROM FEEDBACK_USER_COMMIT
+    </select>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findFeedbackUserCommitByCondition" resultMap="feedbackUserCommitMap" parameterType="map">
+        SELECT
+        <include refid="allColumns" />
+        FROM FEEDBACK_USER_COMMIT WHERE 1 = 1
+        <if test="userId != null">
+            AND userId = #{userId}
+        </if>
+        <if test="title != null and title != ''">
+            AND TITLE LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="information != null and information != ''">
+            AND INFORMATION LIKE CONCAT('%',#{information},'%')
+        </if>
+        <if test="status != null">
+            AND STATUS = #{status}
+        </if>
+        <if test="createTime != null">
+            AND createTime = #{createTime}
+        </if>
+        <if test="modifyTime != null">
+            AND modifyTime = #{modifyTime}
+        </if>
+    </select>
+    
+    <!-- 根据主键查询数据 -->
+    <select id="findFeedbackUserCommitByIds" resultMap="feedbackUserCommitMap" parameterType="list">
+        SELECT
+        <include refid="allColumns" />
+        FROM FEEDBACK_USER_COMMIT WHERE ID IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    
+    <!-- 批量插入数据 -->
+    <insert id="insertFeedbackUserCommits" parameterType="list">
+        INSERT INTO FEEDBACK_USER_COMMIT (<include refid="allColumns" />)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.userId},
+                #{item.title},
+                #{item.information},
+                #{item.status},
+                #{item.createTime},
+                #{item.modifyTime}
+            )
+        </foreach>
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateFeedbackUserCommit" parameterType="map">
+        UPDATE FEEDBACK_USER_COMMIT
+        <set>
+            <if test="userId != null">userId = #{userId},</if>
+            <if test="title != null">TITLE = #{title},</if>
+            <if test="information != null">INFORMATION = #{information},</if>
+            <if test="status != null">STATUS = #{status},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="modifyTime != null">modifyTime = #{modifyTime}</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+    
+    <!-- 批量修改数据 -->
+    <update id="updateFeedbackUserCommits" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE FEEDBACK_USER_COMMIT
+            <set>
+                <if test="userId != null">userId = #{item.userId},</if>
+                <if test="title != null">TITLE = #{item.title},</if>
+                <if test="information != null">INFORMATION = #{item.information},</if>
+                <if test="status != null">STATUS = #{item.status},</if>
+                <if test="createTime != null">createTime = #{item.createTime},</if>
+                <if test="modifyTime != null">modifyTime = #{item.modifyTime}</if>
+            </set>
+            WHERE ID = #{item.id}
+        </foreach>
+    </update>
+    
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteFeedbackUserCommitById" parameterType="string">
+        DELETE FROM FEEDBACK_USER_COMMIT WHERE ID = #{id}
+    </delete>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteFeedbackUserCommitByIds" parameterType="list">
+        DELETE FROM FEEDBACK_USER_COMMIT WHERE ID IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

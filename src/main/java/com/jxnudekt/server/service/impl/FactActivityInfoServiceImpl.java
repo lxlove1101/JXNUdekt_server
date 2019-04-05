@@ -25,7 +25,7 @@ public class FactActivityInfoServiceImpl implements FactActivityInfoService {
     }
 
     @Override
-    public List<FactActivityInfoEntity> findFactActivityInfoByCondition(FactActivityInfoEntity activityInfoEntity) {
+    public List<FactActivityInfoEntity> findFactActivityInfoByCondition(Map activityInfoEntity) {
         return factActivityInfoDao.findFactActivityInfoByCondition(activityInfoEntity);
     }
 

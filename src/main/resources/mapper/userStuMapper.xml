@@ -71,12 +71,18 @@
     </select>
 
     <!--条件搜索学生用户-->
-    <select id="queryUserDetail" resultMap="userStuDetail" parameterType="string">
-        SELECT a.id, a.userId, a.password, a.username, b.className, c.collegeName, a.headImg, a.sex, a.telephone, a.email
+    <select id="queryUserDetail" resultMap="userStuDetail" parameterType="map">
+        SELECT a.id, a.userId, a.password, a.username, a.classId, b.className, a.collegeId,c.collegeName, a.headImg, a.sex, a.telephone, a.email
         FROM user_stu AS a
                  LEFT JOIN dim_class AS b ON a.classId = b.id
                  LEFT JOIN dim_college AS c ON a.collegeId = c.id
-        WHERE a.userId = #{param} OR a.username = #{param}
+        WHERE
+        <if test="userId != null and userId != ''">
+            a.userId = #{userId}
+        </if>
+        <if test="username != null and username != ''">
+            a.username LIKE CONCAT('%',#{username},'%')
+        </if>
     </select>
 
     <!-- 根据条件查询数据 -->

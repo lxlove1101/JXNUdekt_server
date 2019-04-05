@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS dim_college;
 CREATE TABLE dim_college (
   id          SMALLINT AUTO_INCREMENT,
   collegeName VARCHAR(20) UNIQUE NOT NULL,
-  tag         VARCHAR(20)        NOT NULL,
+  tag         VARCHAR(10)        NOT NULL,
   status      TINYINT            NOT NULL,
   createTime  DATETIME           NOT NULL,
   modifyTime  DATETIME           NOT NULL,
@@ -272,16 +272,32 @@ VALUES (null, '软件学院', 'ruanjian', 1, NOW(), NOW()),
        (null, '理电学院', 'lidian', 1, NOW(), NOW());
 
 -- 班级维表
-DROP TABLE IF EXISTS DIM_CLASS;
-CREATE TABLE DIM_CLASS (
+DROP TABLE IF EXISTS dim_class;
+CREATE TABLE dim_class (
   id         BIGINT AUTO_INCREMENT,
   className  VARCHAR(32) UNIQUE NOT NULL,
   tag        VARCHAR(10)        NOT NULL,
-  collegeId  BIGINT             NOT NULL,
+  collegeId  SMALLINT           NOT NULL,
+  status      TINYINT            NOT NULL,
   createTime DATETIME           NOT NULL,
   modifyTime DATETIME           NOT NULL,
-  endTime    DATETIME           NOT NULL,
   PRIMARY KEY (id)
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = UTF8
+  AUTO_INCREMENT = 1;
+
+-- 意见反馈表
+DROP TABLE IF EXISTS feedback_user_commit;
+CREATE TABLE feedback_user_commit(
+  id          BIGINT AUTO_INCREMENT,
+  userId      BIGINT       NOT NULL,
+  title       VARCHAR(64)  NOT NULL,
+  information VARCHAR(512) NOT NULL,
+  status      SMALLINT     NOT NULL,
+  createTime  DATETIME     NOT NULL,
+  modifyTime  DATETIME     NOT NULL,
+  PRIMARY KEY(id)
 )
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8

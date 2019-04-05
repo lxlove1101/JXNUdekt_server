@@ -30,8 +30,8 @@ public class UserStuServiceImpl implements UserStuService {
     }
 
     @Override
-    public List<UserStuDetailEntity> queryUserDetail(String param) {
-        return userStuDao.queryUserDetail(param);
+    public List<UserStuDetailEntity> queryUserDetail(Map map) {
+        return userStuDao.queryUserDetail(map);
     }
 
     @Override

@@ -71,16 +71,25 @@ public class UserStuController {
     }
 
     @ApiOperation(value = "搜索用户", notes = "根据学号或姓名查询用户详细信息")
-    @ApiImplicitParam(name = "param", value = "param", required = true, dataType = "String", paramType = "path")
-    @RequestMapping(value = "/QUERY_USER_DETAIL/{param}", method = RequestMethod.GET)
-    public ResultModel queryUserDetail(@PathVariable String param) {
+    @RequestMapping(value = "/QUERY_USER_DETAIL", method = RequestMethod.POST)
+    public ResultModel queryUserDetail(@RequestBody Map bodyMap) {
         try {
-            List<UserStuDetailEntity> result = userStuService.queryUserDetail(param);
+            Integer page = (Integer) bodyMap.get("page");
+            Integer pageSize = (Integer) bodyMap.get("pageSize");
+            if (page == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
+            }
+            if (pageSize == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
+            }
+            PageHelper.startPage(page, pageSize);
+            List<UserStuDetailEntity> result = userStuService.queryUserDetail(bodyMap);
             if (result.size() == 0) {
                 return ResultTool.result("CONTENT_EMPTY", "", null);
             }
+            PageInfo<UserStuDetailEntity> pageInfo = new PageInfo<>(result);
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("content", result);
+            map.put("content", pageInfo);
             return ResultTool.result("SUCCESS", "", map);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);

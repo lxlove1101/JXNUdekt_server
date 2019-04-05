@@ -65,16 +65,25 @@ public class ActivityController {
     }
 
     @ApiOperation(value = "根据条件查询活动信息", notes = "根据条件查询活动信息")
-    @ApiImplicitParam(name = "activityInfoEntity", value = "活动信息对象Map", required = true, dataType = "FactActivityInfoEntity", paramType = "body")
     @RequestMapping(value = "/QUERY_ACTIVITY_BY_CONDITION", method = RequestMethod.POST)
-    public ResultModel queryActivityInfoByCondition(@RequestBody FactActivityInfoEntity activityInfoEntity) {
+    public ResultModel queryActivityInfoByCondition(@RequestBody Map bodyMap) {
         try {
-            List<FactActivityInfoEntity> activityInfoEntities = activityInfoService.findFactActivityInfoByCondition(activityInfoEntity);
+            Integer page = (Integer) bodyMap.get("page");
+            Integer pageSize = (Integer) bodyMap.get("pageSize");
+            if (page == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
+            }
+            if (pageSize == null) {
+                return ResultTool.result("PARAMETER_ERROR", "", null);
+            }
+            PageHelper.startPage(page, pageSize);
+            List<FactActivityInfoEntity> activityInfoEntities = activityInfoService.findFactActivityInfoByCondition(bodyMap);
             if (activityInfoEntities.size() == 0) {
                 return ResultTool.result("CONTENT_EMPTY", "", null);
             }
+            PageInfo<FactActivityInfoEntity> pageInfo = new PageInfo<>(activityInfoEntities);
             Map<String, Object> resultMap = new HashMap<String, Object>();
-            resultMap.put("content", activityInfoEntities);
+            resultMap.put("content", pageInfo);
             return ResultTool.result("SUCCESS", "", resultMap);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);

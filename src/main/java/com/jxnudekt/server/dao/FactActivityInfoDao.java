@@ -13,7 +13,7 @@ import java.util.Map;
  **/
 public interface FactActivityInfoDao {
     List<FactActivityInfoEntity> findFactActivityInfoAll();
-    List<FactActivityInfoEntity> findFactActivityInfoByCondition(FactActivityInfoEntity activityInfoEntity);
+    List<FactActivityInfoEntity> findFactActivityInfoByCondition(Map activityInfoEntity);
     List<FactActivityInfoEntity> findFactActivityInfoByIds(List<Long> ids);
     int insertFactActivityInfo(FactActivityInfoEntity activityInfoEntity);
     int insertFactActivityInfos(List<FactActivityInfoEntity> list);
