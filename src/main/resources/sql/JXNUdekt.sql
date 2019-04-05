@@ -302,3 +302,19 @@ CREATE TABLE feedback_user_commit(
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
+
+-- 学生学分表
+DROP TABLE IF EXISTS user_stu_score;
+CREATE TABLE user_stu_score(
+  id          BIGINT AUTO_INCREMENT,
+  userId      BIGINT       NOT NULL,
+  score       TINYINT      NOT NULL,
+  atyCount    TINYINT      NOT NULL,
+  semester    TINYINT      NOT NULL,
+  createTime  DATETIME     NOT NULL,
+  modifyTime  DATETIME     NOT NULL,
+  PRIMARY KEY(id)
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = UTF8
+  AUTO_INCREMENT = 1;
