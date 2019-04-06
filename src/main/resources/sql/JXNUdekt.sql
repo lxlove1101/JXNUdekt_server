@@ -318,3 +318,10 @@ CREATE TABLE user_stu_score(
   ENGINE = INNODB
   DEFAULT CHARSET = UTF8
   AUTO_INCREMENT = 1;
+
+INSERT INTO user_stu_score
+VALUES (null, 1, 5, 10, 1, NOW(), NOW()),
+       (null, 2, 2, 2, 1, NOW(), NOW()),
+       (null, 3, 4, 4, 1, NOW(), NOW()),
+       (null, 4, 1, 1, 1, NOW(), NOW()),
+       (null, 5, 9, 3, 1, NOW(), NOW());

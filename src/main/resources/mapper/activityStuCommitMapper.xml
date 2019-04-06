@@ -37,6 +37,13 @@
         </foreach>
     </insert>
     
+    <select id="findActivityStuCommitBySemester" resultType="map" parameterType="string">
+        SELECT a.*, b.name as activityName
+        FROM activity_stu_commit AS a
+        INNER JOIN fact_activity_info AS b ON a.activityId = b.id
+        WHERE a.createTime > #{startTime} AND a.createTime &lt; #{endTime};
+    </select>
+    
     <!-- 查询所有数据 -->
     <select id="findActivityStuCommitAll" resultMap="activityStuCommitMap">
         SELECT

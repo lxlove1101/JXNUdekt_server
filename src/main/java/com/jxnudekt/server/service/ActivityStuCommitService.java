@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface ActivityStuCommitService {
     int insertActivityStuCommits(String userId, List<Long> ids);
+    List findActivityStuCommitBySemester(String startTime, String endTime);
 }

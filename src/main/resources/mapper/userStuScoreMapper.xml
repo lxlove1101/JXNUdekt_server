@@ -28,7 +28,7 @@
         LEFT JOIN user_stu_score AS b ON a.id = b.userId
         WHERE a.classId = #{classId}
         AND b.semester = #{semester}
-        ORDER BY b.atyCount
+        ORDER BY b.atyCount DESC
     </select>
 
     <select id="rankUserStuByScore" resultMap="userStuScoreMap" parameterType="int">
@@ -37,7 +37,7 @@
         LEFT JOIN user_stu_score AS b ON a.id = b.userId
         WHERE a.classId = #{classId}
         AND b.semester = #{semester}
-        ORDER BY b.score
+        ORDER BY b.score DESC
     </select>
     
     <!-- 查询所有数据 -->

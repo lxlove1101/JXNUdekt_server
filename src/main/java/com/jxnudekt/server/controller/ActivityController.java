@@ -8,6 +8,7 @@ import com.jxnudekt.server.service.*;
 import com.jxnudekt.server.utils.ResultTool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -138,6 +139,22 @@ public class ActivityController {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("content", result);
             return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "根据学期查询已申报的活动", notes = "根据学期查询已申报的活动")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "startTime", value = "学期开始时间", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "endTime", value = "学期结束时间", required = true, dataType = "String", paramType = "query")})
+    @RequestMapping(value = "/QUERY_ACTIVITY_COMMIT", method = RequestMethod.GET)
+    public ResultModel queryActivityCommit(@RequestParam String startTime, @RequestParam String endTime) {
+        try {
+                List list = activityStuCommitService.findActivityStuCommitBySemester(startTime, endTime);
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("content", list);
+                return ResultTool.result("SUCCESS", "", map);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }

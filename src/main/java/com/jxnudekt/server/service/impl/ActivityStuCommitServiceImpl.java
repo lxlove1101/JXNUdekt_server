@@ -17,4 +17,9 @@ public class ActivityStuCommitServiceImpl implements ActivityStuCommitService {
     public int insertActivityStuCommits(String userId, List<Long> ids) {
         return activityStuCommitDao.insertActivityStuCommits(userId, ids);
     }
+
+    @Override
+    public List findActivityStuCommitBySemester(String startTime, String endTime) {
+        return activityStuCommitDao.findActivityStuCommitBySemester(startTime, endTime);
+    }
 }
