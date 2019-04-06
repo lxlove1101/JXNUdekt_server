@@ -23,4 +23,6 @@ public interface FactActivityInfoService {
 
     List<FactActivityDetailEntity> findFactActivityDetailByTypeId(Map activityInfoEntity);
     FactActivityDetailEntity findFactActivityDetailById(Long id);
+
+    List<FactActivityInfoEntity> findFactActivityByCollege(Integer collegeId);
 }

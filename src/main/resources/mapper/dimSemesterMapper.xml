@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DIM_SEMESTER -->
+<mapper namespace="com.jxnudekt.server.dao.DimSemesterDao">
+    <!-- 结果映射 -->
+    <resultMap id="dimSemesterMap" type="DimSemesterEntity">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="semester" property="semester" jdbcType="VARCHAR" />
+        <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+        <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <!-- 表所有字段 -->
+    <sql id="allColumns">
+        id, semester, startTime, endTime
+    </sql>
+    
+    <!-- 查询所有数据 -->
+    <select id="findDimSemesterAll" resultMap="dimSemesterMap">
+        SELECT id, semester, DATE_FORMAT(startTime,'%Y-%m-%d') AS startTime, DATE_FORMAT(endTime,'%Y-%m-%d') AS endTime
+        FROM dim_semester
+    </select>
+    
+    <!-- 根据条件查询数据 -->
+    <select id="findDimSemesterByCondition" resultMap="dimSemesterMap" parameterType="map">
+        SELECT
+        <include refid="allColumns" />
+        FROM DIM_SEMESTER WHERE 1 = 1
+        <if test="semester != null and semester != ''">
+            AND SEMESTER LIKE CONCAT('%',#{semester},'%')
+        </if>
+        <if test="startTime != null">
+            AND startTime = #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND endTime = #{endTime}
+        </if>
+    </select>
+    
+    <!-- 根据主键查询数据 -->
+    <select id="findDimSemesterByIds" resultMap="dimSemesterMap" parameterType="list">
+        SELECT
+        <include refid="allColumns" />
+        FROM DIM_SEMESTER WHERE ID IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    
+    <!-- 插入数据 -->
+    <insert id="insertDimSemester" parameterType="map">
+        INSERT INTO DIM_SEMESTER (<include refid="allColumns" />)
+        VALUES (
+            #{id},
+            #{semester},
+            #{startTime},
+            #{endTime}
+        )
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="insertDimSemesters" parameterType="list">
+        INSERT INTO DIM_SEMESTER (<include refid="allColumns" />)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.id},
+                #{item.semester},
+                #{item.startTime},
+                #{item.endTime}
+            )
+        </foreach>
+    </insert>
+    
+    <!-- 修改数据 -->
+    <update id="updateDimSemester" parameterType="map">
+        UPDATE DIM_SEMESTER
+        <set>
+            <if test="semester != null">SEMESTER = #{semester},</if>
+            <if test="startTime != null">startTime = #{startTime},</if>
+            <if test="endTime != null">endTime = #{endTime}</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+    
+    <!-- 批量修改数据 -->
+    <update id="updateDimSemesters" parameterType="list">
+        <foreach collection="list" index="index" item="item" separator=";">
+            UPDATE DIM_SEMESTER
+            <set>
+                <if test="semester != null">SEMESTER = #{item.semester},</if>
+                <if test="startTime != null">startTime = #{item.startTime},</if>
+                <if test="endTime != null">endTime = #{item.endTime}</if>
+            </set>
+            WHERE ID = #{item.id}
+        </foreach>
+    </update>
+    
+    <!-- 根据主键删除数据 -->
+    <delete id="deleteDimSemesterById" parameterType="string">
+        DELETE FROM DIM_SEMESTER WHERE ID = #{id}
+    </delete>
+    
+    <!-- 根据主键批量删除数据 -->
+    <delete id="deleteDimSemesterByIds" parameterType="list">
+        DELETE FROM DIM_SEMESTER WHERE ID IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

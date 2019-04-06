@@ -147,14 +147,30 @@ public class ActivityController {
     @ApiOperation(value = "根据学期查询已申报的活动", notes = "根据学期查询已申报的活动")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "startTime", value = "学期开始时间", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "endTime", value = "学期结束时间", required = true, dataType = "String", paramType = "query")})
+            @ApiImplicitParam(name = "endTime", value = "学期结束时间", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "String", paramType = "query")})
     @RequestMapping(value = "/QUERY_ACTIVITY_COMMIT", method = RequestMethod.GET)
-    public ResultModel queryActivityCommit(@RequestParam String startTime, @RequestParam String endTime) {
+    public ResultModel queryActivityCommit(@RequestParam String startTime, @RequestParam String endTime, @RequestParam String userId) {
         try {
-                List list = activityStuCommitService.findActivityStuCommitBySemester(startTime, endTime);
+                List list = activityStuCommitService.findActivityStuCommitBySemester(startTime, endTime, userId);
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("content", list);
                 return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "根据id删除提交的活动", notes = "根据id删除提交的活动")
+    @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "/CANCEL_COMMIT_ACTIVITY_BY_ID/{id}", method = RequestMethod.GET)
+    public ResultModel deleteActivityCommitById(@PathVariable String id) {
+        try {
+            int code = activityStuCommitService.deleteActivityStuCommitById(id);
+            if(1 == code){
+                return ResultTool.result("SUCCESS", "", null);
+            }
+            return ResultTool.result("NOT_FOUND", "失败", null);
         } catch (Exception e) {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }

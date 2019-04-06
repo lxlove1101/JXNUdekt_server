@@ -19,7 +19,12 @@ public class ActivityStuCommitServiceImpl implements ActivityStuCommitService {
     }
 
     @Override
-    public List findActivityStuCommitBySemester(String startTime, String endTime) {
-        return activityStuCommitDao.findActivityStuCommitBySemester(startTime, endTime);
+    public List findActivityStuCommitBySemester(String startTime, String endTime, String userId) {
+        return activityStuCommitDao.findActivityStuCommitBySemester(startTime, endTime, userId);
+    }
+
+    @Override
+    public int deleteActivityStuCommitById(String id) {
+        return activityStuCommitDao.deleteActivityStuCommitById(id);
     }
 }

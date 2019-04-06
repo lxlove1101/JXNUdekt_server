@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service(value = "UserStuScoreService")
 public class UserStuScoreServiceImpl implements UserStuScoreService {
@@ -21,5 +22,10 @@ public class UserStuScoreServiceImpl implements UserStuScoreService {
     @Override
     public List<UserStuScoreEntity> rankUserStuByScore(Integer classId, Integer semester) {
         return userStuScoreDao.rankUserStuByScore(classId, semester);
+    }
+
+    @Override
+    public Map findUserScoreBySemester(Integer userId, Integer semester) {
+        return userStuScoreDao.findUserScoreBySemester(userId, semester);
     }
 }

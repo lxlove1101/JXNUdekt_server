@@ -1,7 +1,10 @@
 package com.jxnudekt.server.controller;
 
+import com.jxnudekt.server.dao.FactActivityInfoDao;
+import com.jxnudekt.server.entity.FactActivityInfoEntity;
 import com.jxnudekt.server.entity.UserStuScoreEntity;
 import com.jxnudekt.server.model.ResultModel;
+import com.jxnudekt.server.service.FactActivityInfoService;
 import com.jxnudekt.server.service.UserStuScoreService;
 import com.jxnudekt.server.utils.ResultTool;
 import io.swagger.annotations.Api;
@@ -24,6 +27,9 @@ import java.util.Map;
 public class StatisticalController {
     @Autowired
     private UserStuScoreService userStuScoreService;
+
+    @Autowired
+    private FactActivityInfoService factActivityInfoService;
 
     @ApiOperation(value = "班级排行信息", notes = "班级排行信息")
     @ApiImplicitParams({
@@ -50,4 +56,37 @@ public class StatisticalController {
             return ResultTool.result("NOT_FOUND", e.getMessage(), null);
         }
     }
+
+    @ApiOperation(value = "用户学期所获得的分数", notes = "用户学期所获得的分数")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "semester", value = "学期ID", required = true, dataType = "String", paramType = "query")})
+    @RequestMapping(value = "/QUERY_SEMESTER_SCORE_BY_USER", method = RequestMethod.GET)
+    public ResultModel querySemesterScoreByUser(@RequestParam String userId, @RequestParam String semester) {
+        try {
+            Map result = userStuScoreService.findUserScoreBySemester(Integer.parseInt(userId), Integer.parseInt(semester));
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", result);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+    @ApiOperation(value = "根据学院查询发布的活动", notes = "根据学院查询发布的活动")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "collegeId", value = "学院ID", required = true, dataType = "String", paramType = "query")})
+    @RequestMapping(value = "/QUERY_ACTIVITY_BY_COLLEGE", method = RequestMethod.GET)
+    public ResultModel queryActivityByCollege(@RequestParam String collegeId) {
+        try {
+            List<FactActivityInfoEntity> list = factActivityInfoService.findFactActivityByCollege(Integer.parseInt((collegeId)));
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", list);
+            return ResultTool.result("SUCCESS", "", map);
+        } catch (Exception e) {
+            return ResultTool.result("NOT_FOUND", e.getMessage(), null);
+        }
+    }
+
+
 }

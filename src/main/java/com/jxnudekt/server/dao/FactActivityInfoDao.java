@@ -25,4 +25,6 @@ public interface FactActivityInfoDao {
 //    根据一级类id查询所有活动详细信息->关联具体类别名称
     List<FactActivityDetailEntity> findFactActivityDetailByTypeId(Map activityInfoEntity);
     FactActivityDetailEntity findFactActivityDetailById(@Param("id")Long id);
+
+    List<FactActivityInfoEntity> findFactActivityByCollege(@Param("collegeId")Integer collegeId);
 }

@@ -22,6 +22,7 @@
         modifyTime
     </sql>
 
+    <!--班级排行信息-->
     <select id="rankUserStuByatyCount" resultMap="userStuScoreMap" parameterType="int">
         SELECT b.*, a.username, a.headImg
         FROM user_stu AS a
@@ -30,7 +31,6 @@
         AND b.semester = #{semester}
         ORDER BY b.atyCount DESC
     </select>
-
     <select id="rankUserStuByScore" resultMap="userStuScoreMap" parameterType="int">
         SELECT b.*, a.username, a.headImg
         FROM user_stu AS a
@@ -38,6 +38,13 @@
         WHERE a.classId = #{classId}
         AND b.semester = #{semester}
         ORDER BY b.score DESC
+    </select>
+
+    <!--查询用户在学期得到的分数-->
+    <select id="findUserScoreBySemester" resultType="map" parameterType="int">
+        SELECT <include refid="allColumns" />
+        FROM user_stu_score
+        WHERE userId = #{userId} AND semester = #{semester}
     </select>
     
     <!-- 查询所有数据 -->

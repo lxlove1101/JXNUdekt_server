@@ -5,7 +5,7 @@
 <mapper namespace="com.jxnudekt.server.dao.ActivityStuCommitDao">
     <!-- 结果映射 -->
     <resultMap id="activityStuCommitMap" type="ActivityStuCommitEntity">
-        <id column="ID" property="id" jdbcType="BIGINT" />
+        <id column="id" property="id" jdbcType="BIGINT" />
         <result column="userId" property="userId" jdbcType="VARCHAR" />
         <result column="activityId" property="activityId" jdbcType="BIGINT" />
         <result column="checkStatus" property="checkStatus" jdbcType="INTEGER" />
@@ -16,7 +16,7 @@
 
     <!-- 表所有字段 -->
     <sql id="allColumns">
-        ID, userId, activityId, checkStatus, checkUserId, createTime,
+        id, userId, activityId, checkStatus, checkUserId, createTime,
         modifyTime
     </sql>
 
@@ -36,14 +36,21 @@
             )
         </foreach>
     </insert>
-    
+
+    <!--根据学期查询用户已提交的活动-->
     <select id="findActivityStuCommitBySemester" resultType="map" parameterType="string">
         SELECT a.*, b.name as activityName
         FROM activity_stu_commit AS a
         INNER JOIN fact_activity_info AS b ON a.activityId = b.id
-        WHERE a.createTime > #{startTime} AND a.createTime &lt; #{endTime};
+        WHERE a.createTime > #{startTime} AND a.createTime &lt; #{endTime} AND a.userId = #{userId};
     </select>
-    
+
+    <!-- 根据id删除数据 -->
+    <delete id="deleteActivityStuCommitById" parameterType="string">
+        DELETE FROM activity_stu_commit WHERE id = #{id}
+    </delete>
+
+
     <!-- 查询所有数据 -->
     <select id="findActivityStuCommitAll" resultMap="activityStuCommitMap">
         SELECT
@@ -130,10 +137,7 @@
         </foreach>
     </update>
     
-    <!-- 根据主键删除数据 -->
-    <delete id="deleteActivityStuCommitById" parameterType="string">
-        DELETE FROM ACTIVITY_STU_COMMIT WHERE ID = #{id}
-    </delete>
+
     
     <!-- 根据主键批量删除数据 -->
     <delete id="deleteActivityStuCommitByIds" parameterType="list">

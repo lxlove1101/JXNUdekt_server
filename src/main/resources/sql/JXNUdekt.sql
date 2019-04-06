@@ -325,3 +325,28 @@ VALUES (null, 1, 5, 10, 1, NOW(), NOW()),
        (null, 3, 4, 4, 1, NOW(), NOW()),
        (null, 4, 1, 1, 1, NOW(), NOW()),
        (null, 5, 9, 3, 1, NOW(), NOW());
+
+-- 学期时间表
+DROP TABLE IF EXISTS dim_semester;
+CREATE TABLE dim_semester(
+  id  SMALLINT AUTO_INCREMENT,
+  semester VARCHAR(32) NOT NULL,
+  startTime DATETIME NOT NULL,
+  endTime DATETIME NOT NULL,
+  PRIMARY KEY(id)
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = UTF8
+  AUTO_INCREMENT = 1;
+
+INSERT INTO dim_semester 
+VALUES (null, "2014-2015学年第一学期", "2014-09-01", "2015-03-01"),
+       (null, "2014-2015学年第二学期", "2015-03-02", "2015-09-06"),
+       (null, "2015-2016学年第一学期", "2015-09-07", "2016-02-28"),
+       (null, "2015-2016学年第二学期", "2016-02-29", "2016-08-31"),
+       (null, "2016-2017学年第一学期", "2016-09-01", "2017-02-19"),
+       (null, "2016-2017学年第二学期", "2017-02-20", "2017-09-03"),
+       (null, "2017-2018学年第一学期", "2017-09-04", "2018-02-25"),
+       (null, "2017-2018学年第二学期", "2018-02-26", "2018-09-02"),
+       (null, "2018-2019学年第一学期", "2018-09-03", "2019-02-24"),
+       (null, "2018-2019学年第二学期", "2019-02-25", "2019-09-01");

@@ -78,6 +78,14 @@
         WHERE a.id = #{id}
     </select>
 
+    <!--根据学院ID查询活动信息-->
+    <select id="findFactActivityByCollege" resultMap="factActivityInfoMap" parameterType="int">
+        SELECT
+        <include refid="allColumns" />
+        FROM fact_activity_info
+        WHERE collegeId = #{collegeId}
+    </select>
+
     <!-- 根据条件查询数据 -->
     <select id="findFactActivityInfoByCondition" resultMap="factActivityInfoMap" parameterType="map">
         SELECT
